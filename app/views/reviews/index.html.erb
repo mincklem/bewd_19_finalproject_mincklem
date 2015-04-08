@@ -1,0 +1,65 @@
+
+<div class="mainContainer">
+
+ <!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" aria-labelledby="reviewsTab" class="tab-pane fade in active" id="reviews">
+  <div class="searchReviews">
+    <%= form_tag "/", method: "GET" do |f| %>
+      <%= label_tag(:isbn, "Search reviews:") %>
+      <%= text_field_tag(:isbn, params[:isbn]) %>
+      <%= submit_tag("Search") %>
+    <% end %>
+  </div>  
+      <div class="submitISBN">
+        <%= form_for @review do |f| %>
+         <p>
+          <%= f.label :isbn %>
+          <%= f.text_field :isbn %>
+        </p>
+         <p>
+          <%= f.submit %>
+         </p>
+        <% end %>
+      </div>
+      
+  	<%= render 'list' %></div>
+
+  <div role="tabpanel" aria-labelledby="wordCloudTab" class="tab-pane fade" id="wordCloudPanel">
+		<div class="btn-group" data-toggle="buttons-checkbox">
+			<h2>Filter reviews</h2>
+			<button type="button" id="sb1" class="btn btn-default btn-lg">
+			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 1 Star
+			</button>
+			<button type="button" id="sb2" class="btn btn-default btn-lg">
+			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 2 Star
+			</button>
+			<button type="button" id="sb3" class="btn btn-default btn-lg">
+			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 3 Star
+			</button>
+			<button type="button" id="sb4" class="btn btn-default btn-lg">
+			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 4 Star
+			</button>
+			<button type="button" id="sb5" class="btn btn-default btn-lg">
+			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 5 Star
+			</button>
+			<button type="submit" id="starSubmit" class="btn btn-default btn-lg"> Submit 
+			</button>
+		</div>
+		<div class="cloudParams">
+			<p>Exclude words (space separated): <input type="text" name="fname" id="user_excludes"></p>
+			<p>Minimum word frequency: <input type="text" name="fname" id="count_limit"></p>
+			<p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p>
+			<br><br> 
+		</div>
+			<div class="wordCloudsBox">
+				WORD CLOUD
+			</div>
+  </div>
+  <div role="tabpanel" aria-labelledby="themesTab" class="tab-pane fade" id="themes">3</div>
+  <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">4</div>
+</div>
+
+
+
+	</div>

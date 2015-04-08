@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover" data-sort-name="ISBN" data-sort-order="desc">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>ISBN</th>
+			<th>REVIEW TITLE</th>
+			<th>TEXT</th>
+			<th>Star Rating</th>
+			<th>Shelves</th>
+			<th>Likes</th>
+		</tr>
+	</thead>
+	<% @reviews.each do |review| %>
+	<tbody>
+		<td><%= review.id %></td>
+	    <td><%= review.isbn %></td>
+	    <td><%= review.title %></td> 
+	    <td><%= review.review_text %></td>
+	    <td><%= review.star_rating %></td>
+	    <td><%= review.shelves %></td>
+	    <td><%= review.likes %></td>
+	</tbody>
+	<% end %>
+
+</table>

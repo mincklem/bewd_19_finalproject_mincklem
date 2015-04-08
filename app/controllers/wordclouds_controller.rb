@@ -1,0 +1,2 @@
+class WordcloudsController < ApplicationController
+end
