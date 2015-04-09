@@ -2,7 +2,6 @@ require './lib/word_count'
 require './lib/stopwords'
 require './lib/review_api'
 require 'rest-client'
-require 'JSON'
 require 'jquery-rails'
 
 class ApplicationController < ActionController::Base
