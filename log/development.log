@@ -51488,3 +51488,40 @@ Processing by ReviewsController#star_rating_filter as */*
   Parameters: {"count"=>"", "user_excludes"=>""}
   [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews"
 Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2015-04-08 20:49:59 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ReviewsController#index as HTML
+  [1m[35mReview Load (0.2ms)[0m  SELECT "reviews".* FROM "reviews" WHERE (isbn LIKE '%%' OR review_text LIKE '%%' OR title LIKE '%%')
+  Rendered reviews/_list.html.erb (2.2ms)
+  Rendered reviews/index.html.erb within layouts/application (21.6ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 1245ms (Views: 1229.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/reviews-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/wordclouds-64e62ddc273c2f5847f30d698ca14b67.css?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/turbolinks-f87b3583ca50adb0488b031297f5580d.js?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/application-3100bda21248a8346d8d7bab20782aff.css?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/reviews-48a116eb9c8088219c3aedbed0897326.js?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/wordclouds-64e62ddc273c2f5847f30d698ca14b67.js?body=1" for ::1 at 2015-04-08 20:50:00 -0400
+
+
+Started GET "/assets/application-c7d26eb776835814ca956afb30c0cb17.js?body=1" for ::1 at 2015-04-08 20:50:00 -0400
