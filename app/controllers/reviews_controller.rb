@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
   		@isbn = params[:isbn]
   		puts @isbn
   		@reviews = Review.where(
-  		"isbn LIKE :query OR review_text LIKE :query OR title LIKE :query", 
+  		"cast(isbn as text) LIKE :query OR review_text LIKE :query OR title LIKE :query", 
   		query: "%#{params[:isbn]}%")
 
   	end
