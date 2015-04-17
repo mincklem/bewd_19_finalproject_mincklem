@@ -1,8 +1,13 @@
 require './lib/word_count'
 require './lib/stopwords'
 require './lib/review_api'
+require './lib/shelves_api'
+require 'JSON'
 require 'rest-client'
 require 'jquery-rails'
+require 'isbn_finder'
+
+
 
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.

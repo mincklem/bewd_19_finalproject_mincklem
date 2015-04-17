@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :reviews
   root "reviews#index"
-
   post '/reviews/stars', :to => 'reviews#star_rating_filter'
-
   get '/wordclouds', :to => 'wordclouds#index'
+  get '/monkey', :to => 'reviews#monkey'
+  get '/search', :to => 'reviews#search'
 
   # get '/:isbn', :to => 'reviews#get_reviews_by_isbn'
 

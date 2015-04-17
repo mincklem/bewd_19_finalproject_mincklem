@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require jqcloud
  */
 
 body {
@@ -71,6 +72,99 @@ margin: 10px;
   right: 0px;
   padding-right: 20px;
 }
+
+.word {
+	display: inline-block
+}
+
+.jqcloud {
+
+}
+
+.bookCover {
+	height: 300px;
+	width: 200px;
+	position: relative;
+	display:inline-block;
+}
+
+.bookCover::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow: hidden;
+	box-shadow: inset 10px -4px 10px rgba(0, 0, 0, 0.3), inset -3px 1px 5px rgba(0, 0, 0, 0.3), 5px 20px 30px rgba(0, 0, 0, 0.4), 1px 7px 13px rgba(0, 0, 0, 0.3), 0px -5px 30px rgba(0, 0, 0, 0.2) !important;
+	z-index: 1;
+	line-height: 0;
+	border-radius: 3px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.chosenTitle {
+	position:relative;
+	height: auto;
+	display: block;
+	padding: 20px;
+
+}
+
+.bookDescription {
+	  position: relative;
+  	display: inline-block;
+
+}
+
+.fa-pulse {
+	margin: 0 auto !important;
+  position: absolute!important;
+  display: block !important;
+  visibility: hidden;
+  z-index:	-1;
+}
+
+.monkey_keywords {
+	width: 100%;
+	height: 500px;
+	background-color:gray;
+
+}
+
+.monkey_themes {
+	width: 100%;
+	height: 500px;
+	background-color:blue;
+}
+
+.single_result {
+	display: block;
+	margin:20px;
+	height: 240px;
+	position: relative;
+	border-bottom: 1px solid gray;
+	  padding-top: 15px;
+
+}
+
+.description_result {
+	display: inline-block;
+	position: absolute;
+	 margin-top: 20px;
+
+}
+
+.cover_result {
+	display: inline-block;
+	position: relative;
+	padding-right: 20px;
+
+}
+
+/*w10, w9, w8, w7, w6, w5, w4, w3, w2, w1*/
+
 
 /*colors:
 

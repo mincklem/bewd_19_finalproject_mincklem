@@ -72,6 +72,8 @@ GEM
     jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jqcloud-rails (1.0.0)
+      jquery-rails
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -180,6 +182,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   jbuilder (~> 2.0)
+  jqcloud-rails
   jquery-rails
   json (~> 1.8.2)
   pg

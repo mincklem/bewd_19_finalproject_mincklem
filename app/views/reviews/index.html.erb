@@ -22,8 +22,16 @@
          </p>
         <% end %>
       </div>
-      
+     <div class="findISBN">
+        <%= form_tag "/search", method: "GET" do |f| %>
+      <%= label_tag(:search, "Search reviews:") %>
+      <%= text_field_tag(:search, params[:search]) %>
+      <%= submit_tag("Search") %>
+    <% end %>
+
+      </div>
   	<%= render 'list' %></div>
+      
 
   <div role="tabpanel" aria-labelledby="wordCloudTab" class="tab-pane fade" id="wordCloudPanel">
 		<div class="btn-group" data-toggle="buttons-checkbox">
@@ -48,16 +56,25 @@
 		</div>
 		<div class="cloudParams">
 			<p>Exclude words (space separated): <input type="text" name="fname" id="user_excludes"></p>
-			<p>Minimum word frequency: <input type="text" name="fname" id="count_limit"></p>
+			<p>Minimum word frequency: <input type="text" name="fname" id="count_limit" value="4"></p>
 			<p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p>
 			<br><br> 
 		</div>
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
 			<div class="wordCloudsBox">
-				WORD CLOUD
 			</div>
   </div>
-  <div role="tabpanel" aria-labelledby="themesTab" class="tab-pane fade" id="themes">3</div>
-  <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">4</div>
+  <div role="tabpanel" aria-labelledby="themesTab" class="tab-pane fade" id="themes">
+  	<div id="monkey_keywords">
+  			
+  	</div>
+  	<div id="monkey_themes">THEMES</div>
+  		<canvas id="themesChart" width="1000px" height="600px"></canvas>
+  	</div>
+  <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">
+
+
+  </div>
 </div>
 
 
