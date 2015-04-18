@@ -1,14 +1,32 @@
 <%10.times do |number| %>
-		<div class="single_result">
-			<div class="cover_result">
-				<img src="<%=@returned_books[number]["volumeInfo"]["imageLinks"]["smallThumbnail"]%>">
+		<% if @returned_books[number]["volumeInfo"]["printType"] == "BOOK" && @returned_books[number]["volumeInfo"]["industryIdentifiers"] && @returned_books[number]["volumeInfo"]["authors"]%>
+			<div class="single_result">
+				<div class="cover_result">
+					<% if @returned_books[number]["volumeInfo"]["imageLinks"]%>
+							<img src="<%=@returned_books[number]["volumeInfo"]["imageLinks"]["smallThumbnail"]%>">
+						<% else%>
+							<img><span>No Image</span></img>
+					<% end %>
+				</div>
+				<div class="description_result">
+					<p><strong>Title: </strong><%="#{@returned_books[number]["volumeInfo"]["title"]}" %></p>
+						<% @returned_books[number]["volumeInfo"]["authors"].each do |this|%>
+							<p>
+								<strong>Author: </strong><%="#{this}" %>
+							</p>
+						<%end%>
+					<p><strong>Publisher: </strong><%="#{@returned_books[number]["volumeInfo"]["publisher"]}" %></p>
+					<p><strong>Publish Date: </strong><%="#{@returned_books[number]["volumeInfo"]["publishedDate"]}" %></p>
+					
+					<% @returned_books[number]["volumeInfo"]["industryIdentifiers"].each do |this|%>
+						<% if this["type"] == "ISBN_10"%>
+							<p>
+								<%= button_to "Get Reviews", reviews_path, :method => "post", :params => {:choice => "#{this["identifier"]}"} %>
+							</p>
+						<% else %>
+						<% end %>
+					<% end %>
+				</div>
 			</div>
-			<div class="description_result">
-				<p><strong>Title: </strong><%="#{@returned_books[number]["volumeInfo"]["title"]}" %></p>
-				<p><strong>Author: </strong><%="#{@returned_books[number]["volumeInfo"]["authors"]}" %></p>
-				<p><strong>Publisher: </strong><%="#{@returned_books[number]["volumeInfo"]["publisher"]}" %></p>
-				<p><strong>Publish Date: </strong><%="#{@returned_books[number]["volumeInfo"]["publishedDate"]}" %></p>
-				<p><%= button_to "Get Reviews", reviews_path, :method => "post", choice: "#{@returned_books[number]["volumeInfo"]["industryIdentifiers"][0]["identifier"]}"%>
-			</div>
-		</div>
+	<%end%>
 <%end%>

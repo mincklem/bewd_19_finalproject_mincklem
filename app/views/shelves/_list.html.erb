@@ -1,0 +1,17 @@
+<table class="table table-bordered table-hover" data-sort-name="Value" data-sort-order="desc">
+	<thead>
+		<tr>
+			<th>ISBN</th>
+			<th>Shelves</th>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<% @shelves.each do |shelf| %>
+	<tbody>
+	    <td><%= shelf.isbn %></td>
+	    <td><%= shelf.shelves %></td>
+	    <td><%= shelf.value %></td>
+	</tbody>
+	<% end %>
+
+</table>

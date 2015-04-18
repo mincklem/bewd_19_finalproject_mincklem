@@ -1,5 +1,14 @@
 
 <div class="mainContainer">
+    <div role="tabpanel">
+      <!-- Nav tabs -->
+      <ul id="myTab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Reviews</a></li>
+        <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
+        <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
+        <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Shelves</a></li>
+      </ul>
+    </div>
 
  <!-- Tab panes -->
 <div class="tab-content">
@@ -21,14 +30,6 @@
           <%= f.submit %>
          </p>
         <% end %>
-      </div>
-     <div class="findISBN">
-        <%= form_tag "/search", method: "GET" do |f| %>
-      <%= label_tag(:search, "Search reviews:") %>
-      <%= text_field_tag(:search, params[:search]) %>
-      <%= submit_tag("Search") %>
-    <% end %>
-
       </div>
   	<%= render 'list' %></div>
       
@@ -68,7 +69,7 @@
   	<div id="monkey_keywords">
   			
   	</div>
-  	<div id="monkey_themes">THEMES</div>
+  	<div id="monkey_themes"></div>
   		<canvas id="themesChart" width="1000px" height="600px"></canvas>
   	</div>
   <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">

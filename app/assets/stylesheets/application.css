@@ -105,11 +105,18 @@ margin: 10px;
 }
 
 .chosenTitle {
-	position:relative;
+	position: relative;
 	height: auto;
-	display: block;
+	display: none;
 	padding: 20px;
+	-webkit-transition: all 1s ease-in-out;
+ 	 -moz-transition: all 1s ease-in-out;
+  	-o-transition: all 1s ease-in-out;
+	  transition: all 1s ease-in-out;
+}
 
+.chosenTitle.visible {
+	display: block;
 }
 
 .bookDescription {
@@ -133,10 +140,10 @@ margin: 10px;
 
 }
 
-.monkey_themes {
-	width: 100%;
-	height: 500px;
-	background-color:blue;
+#monkey_themes {
+	text-align: center;
+	position: relative;
+	padding: 40px;
 }
 
 .single_result {
@@ -160,7 +167,17 @@ margin: 10px;
 	display: inline-block;
 	position: relative;
 	padding-right: 20px;
+	  height: 195px;
+ 	 width: 150px;
 
+}
+
+#themesChart {
+position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  margin-bottom: 40px;
 }
 
 /*w10, w9, w8, w7, w6, w5, w4, w3, w2, w1*/

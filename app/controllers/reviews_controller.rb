@@ -9,8 +9,8 @@ class ReviewsController < ApplicationController
 
 	def index
   		@review = Review.new
-  		@isbn = params[:isbn]
-  		puts @isbn
+  		# @isbn = params[:isbn]
+  		# puts @isbn
   		@reviews = Review.where(
   		"cast(isbn as text) LIKE :query OR review_text LIKE :query OR title LIKE :query", 
   		query: "%#{params[:isbn]}%")
@@ -24,21 +24,24 @@ class ReviewsController < ApplicationController
   	end
 
   	def create
-  			@review = Review.new
+  			puts "firing"
 			@isbn = params[:choice]
 			puts @isbn
-			# @clean_isbn = @isbn.delete("-").delete(" ")
-			puts @clean_isbn
-			if @clean_isbn.length==10 || @clean_isbn.length==13 && @clean_isbn.numeric?
+			  #get isbn from session if it is blank
+			  params[:choice] ||= session[:isbn]
+			  #save isbn to session for future requests
+			  session[:isbn] = params[:choice]
+			  # User.current = params[:choice]
+			if @isbn.length==10 || @isbn.length==13 && @isbn.numeric?
 				puts "That's a nice, clean isbn."
 				api_reviews = ReviewApi::CalledReviews.new
-				@reviews_array = api_reviews.call_reviews(@clean_isbn)
+				@reviews_array = api_reviews.call_reviews(@isbn)
 				@reviews_array.each_with_index do |this|
 						isbn = this[:isbn]
 						title = this[:title]
 						review_text = this[:review_text]
 						likes = this[:likes]
-						shelves = this[:shelves]
+						shelves = this[:shelves]		
 					@added_review = Review.create(isbn: isbn, 
   						title: title, 
   						review_text: review_text,
@@ -67,7 +70,6 @@ class ReviewsController < ApplicationController
 		@top_terms.each do |k,v|
 		  @arr << {:text => k, :weight => v}
 		end
-		
 		@arr.to_json
 		#return to view 
 		respond_to do |format|
@@ -78,9 +80,8 @@ class ReviewsController < ApplicationController
   end
 
   def monkey
-  	@review = Review.new
-  	@isbn = params[:isbn]
-  	puts @isbn
+  	# @isbn = params[:isbn]
+  	# puts @isbn
   	@reviews = Review.where(
 	  	"isbn LIKE :query", 
 	  	query: "%#{@isbn}%")
@@ -99,10 +100,6 @@ class ReviewsController < ApplicationController
 		user_search = params[:search]
 		@returned_books = ISBN.find_isbn(user_search)
 		puts @returned_books
-		10.times do |number|
-			puts "#{number}. #{@returned_books[number]["volumeInfo"]["title"]}"
-			puts @returned_books[number]["volumeInfo"]["imageLinks"]["smallThumbnail"]
-		end
   end
 
 #editing and saving the update in the database - edit/update

@@ -17,8 +17,7 @@
 </head>
 <body>
 <div class="container-fluid">
-	
-	 <div class="header">
+		 <div class="header">
 		Consumer Reviews Dashboard
 
       <div class="login">
@@ -36,17 +35,12 @@
           <div class="bookCover"></div>
           <div class="bookDescription"> DESCRIPTION</div>
       </div>
-
-    <div role="tabpanel">
-
-      <!-- Nav tabs -->
-      <ul id="myTab" class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Reviews</a></li>
-        <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
-        <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
-        <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Shelves</a></li>
-      </ul>
-</div>
+     <div class="findISBN">
+        <%= form_tag "/search", method: "GET" do |f| %>
+      <%= label_tag(:search, "Find ISBN:") %>
+      <%= text_field_tag(:search, params[:search]) %>
+      <%= submit_tag("Search") %>
+    <% end %>
 
 <%= yield %>
 </div>

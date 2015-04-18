@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   root "reviews#index"
   post '/reviews/stars', :to => 'reviews#star_rating_filter'
   get '/wordclouds', :to => 'wordclouds#index'
-  get '/monkey', :to => 'reviews#monkey'
+  post '/monkey', :to => 'reviews#monkey'
   get '/search', :to => 'reviews#search'
-
-  # get '/:isbn', :to => 'reviews#get_reviews_by_isbn'
+  post '/shelves', :to => 'shelves#shelves'
+  get '/shelves', :to => 'shelves#index'
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

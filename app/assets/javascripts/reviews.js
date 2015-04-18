@@ -48,22 +48,34 @@ $(".wordCloudsBox").children().remove();
 
 function shelvesCount(h){
     $("#shelvesTab").click(function(){
-        console.log("getting shelves")
+        console.log("getting shelves");
+        console.log(isbn);
+        $.ajax({
+            type: "POST", 
+            url: '/shelves',
+           beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+           data: {"isbn":isbn}, 
+           success: function(response) {
+            console.log(response);
+            // monkeyKeyWords(response);
+            // // monkeyThemes(response)
+                   }
+                });        
     })
 }
 
-
 function storeISBN() {
-    $("input[type='submit'").click(function(){
-        isbn = $("#review_isbn").val();
+    $("input[value='Get Reviews'").click(function(){
+        isbn = $("input[name='choice']").attr("value");
         console.log(isbn)
     })
 }
+
 function monkeyCall(r){
     $("#themesTab").click(function(){
     // get reviews text
     $.ajax({
-        type: "GET", 
+        type: "POST", 
        url: '/monkey',
        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
        data: {"isbn":isbn}, 
@@ -125,10 +137,18 @@ function monkeyThemes(response){
 }
 
 function activeTab(){	
-		$('#myTab a').click(function (e) {
+	$('#myTab a').click(function (e) {
 		    e.preventDefault();
 		  $('this').tab('show')
-		});
+	});
+}
+
+function showChoice(){
+    $("input[value='Get Reviews']").click(function(){
+        console.log("firing");
+        $(".chosenTitle").css("display", "block")
+    })
+
 }
 
 function graph(result) {
@@ -195,7 +215,7 @@ function graph(result) {
     pointLabelFontStyle : "normal",
 
     //Number - Point label font size in pixels
-    pointLabelFontSize : 10,
+    pointLabelFontSize : 14,
 
     //String - Point label font colour
     pointLabelFontColor : "#666",
@@ -232,6 +252,7 @@ function graph(result) {
     var myRadarChart = new Chart(ctx).Radar(data, options);
 }
 
+showChoice();
 storeISBN();
 shelvesCount();
 monkeyCall();
