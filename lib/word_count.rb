@@ -10,22 +10,21 @@ module WordCloud
 			@user_cloud_prefs = user_cloud_prefs
 		end
 
-		def get_reviews_by_stars
+		def get_reviews_by_stars(isbn)
+			@isbn = isbn
 			@star_array = @user_cloud_prefs[0][:stars]
 			#get user minimum term frequency
 			@count_limit = @user_cloud_prefs[0][:count].to_i
 			#get user exclusion terms
 			@user_excludes = @user_cloud_prefs[0][:user_excludes].downcase.split(' ')
 			@user_excludes.collect{|x| x.strip}
-			# @star_array.pop
 			if @star_array.nil?
 			reviews = Review.all
 			else
 			@star_array.map!{ |element| element.gsub(/sb/, '') }
 			reviews = Review.where(:star_rating => @star_array) 
+			# reviews = Review.where(:star_rating => @star_array, :isbn => @isbn) 
 			end
-			# get star reviews from database by rating
-
 			#get review text from each and add to variable
 			reviews.each do |review|
 				@@all_reviews_text.push(review.review_text)
@@ -48,13 +47,9 @@ module WordCloud
 			end
 			sorted_counts = counts.sort_by(&:last)
 			hash_counts = Hash[*sorted_counts.flatten]
-			# if defined?(@count_limit)
-			# 	@count_limit == 5
-			# end
+			
 			#remove 1 letter words (key.length) that appear less than a certain number of times (value) 
 			hash_counts.delete_if {|key, value| key.length <= 1 || value < @count_limit}
-			# key.scan(/\[[0-9]+\]/) { |match| match }
-
 			#remove user exclusion words 
 			@user_excludes.each do |word|
 				hash_counts.delete_if {|key, value| key == word }
@@ -95,6 +90,7 @@ module WordCloud
 			both
 			but
 			by
+			can
 			can't
 			cannot
 			could

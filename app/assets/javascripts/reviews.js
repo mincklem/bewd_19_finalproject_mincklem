@@ -57,8 +57,7 @@ function shelvesCount(h){
            data: {"isbn":isbn}, 
            success: function(response) {
             console.log(response);
-            // monkeyKeyWords(response);
-            // // monkeyThemes(response)
+            graphShelves(response)
                    }
                 });        
     })
@@ -81,8 +80,7 @@ function monkeyCall(r){
        data: {"isbn":isbn}, 
        success: function(response) {
         console.log(response);
-        monkeyKeyWords(response);
-        // monkeyThemes(response)
+        monkeyKeyWords(response)
                }
             });
 
@@ -105,7 +103,7 @@ function monkeyKeyWords(response){
         }),
         success : function(result) {
           console.log(result);
-          graph(result);
+          graphMonkey(result);
         },
         error : function(e) {
           alert('Error: ' + e);
@@ -128,7 +126,7 @@ function monkeyThemes(response){
         }),
         success : function(result) {
           console.log(result);
-          graph(result)
+          graphMonkey(result)
         },
         error : function(e) {
           alert('Error: ' + e);
@@ -151,7 +149,76 @@ function showChoice(){
 
 }
 
-function graph(result) {
+function graphShelves(result){
+    console.log("graphing");
+    var data_labels = [];
+    var data_vals = [];
+    $.each(result, function(i, val){
+        console.log(i);
+        console.log(val);
+        data_labels.push(i);
+        data_vals.push(val);
+    });
+    for(var i = 0; i < data_vals.length; i++)
+        data_vals[i] = parseInt(data_vals[i], 10);
+    var data = {
+        labels: data_labels,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "#1B4171",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: data_vals
+            }
+        ]
+    };
+     var options = {
+    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+    scaleBeginAtZero : true,
+
+    //Boolean - Whether grid lines are shown across the chart
+    scaleShowGridLines : true,
+
+    //String - Colour of the grid lines
+    scaleGridLineColor : "rgba(0,0,0,.05)",
+
+    //Number - Width of the grid lines
+    scaleGridLineWidth : 1,
+
+    //Boolean - Whether to show horizontal lines (except X axis)
+    scaleShowHorizontalLines: true,
+
+    //Boolean - Whether to show vertical lines (except Y axis)
+    scaleShowVerticalLines: true,
+
+    //Boolean - If there is a stroke on each bar
+    barShowStroke : true,
+
+    //Number - Pixel width of the bar stroke
+    barStrokeWidth : 2,
+
+    //Number - Spacing between each of the X value sets
+    barValueSpacing : 5,
+
+    //Number - Spacing between data sets within X values
+    barDatasetSpacing : 1,
+
+    //String - A legend template
+    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+};
+        // Get context with jQuery - using jQuery's .get() method.
+    var ctx = $("#shelvesChart").get(0).getContext("2d");
+    // This will get the first returned node in the jQuery collection.
+    var myNewChart = new Chart(ctx);
+    // create chart
+    var myBarChart = new Chart(ctx).Bar(data, options);
+    
+}
+
+function graphMonkey(result) {
     // breakout results for graphing
     var data_labels = [];
     var data_vals = [];
@@ -245,7 +312,7 @@ function graph(result) {
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
     }
     // Get context with jQuery - using jQuery's .get() method.
-    var ctx = $("#themesChart").get(0).getContext("2d");
+    var ctx = $("#keywordsChart").get(0).getContext("2d");
     // This will get the first returned node in the jQuery collection.
     var myNewChart = new Chart(ctx);
     // create chart

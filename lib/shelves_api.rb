@@ -1,11 +1,5 @@
 module ShelvesApi
 		def self.call_shelves(isbn)
-			# attr_accessor :isbn
-			# def initialize(isbn)
-			# 	@isbn = isbn
-			# end
-			@shelves_array = []
-			puts isbn
 			#getting Goodreads work ID
 			xml = RestClient.get "https://www.goodreads.com/search/index.xml?key=LbfI8uwSm3Hd7X4Q1VoDsA&q=#{isbn}"
 	  		@json = JSON.load(Hash.from_xml(xml).to_json)
@@ -22,28 +16,17 @@ module ShelvesApi
 				@values = []
 		  		@response["results"].each do |two_columns|
 					two_columns["my_column_2/_source"].each do |this|
-		  				@keys.push(this.split("=")[1])
+		  				@keys.push(this.split("=")[1].downcase)
 		  			end
 		  			two_columns["my_column_2/_text"].each do |this|
 		  				@values.push(this.split(" ")[0])
 		  			end
 		  		end
 	  			@zipped = @keys.zip(@values)
-				@shelves_hash = Hash[@zipped]
-				puts @shelves_hash
-				@shelves_hash
+				@h = Hash[@zipped]
+				puts @h
+				@h
 	  		end
-	  		# puts @shelves_array
-
-	  # 		response["data"]["children"].each do |rev|
-	  #   		mapped_review = {isbn: rev["data"]["created"],
-	  #   			title: rev["data"]["author"], 
-	  #   			review_text: rev["data"]["title"],
-	  #   			likes: rev["data"]["ups"],
-	  #   			shelves: rev["data"]["subreddit"]}
-	  #   		@reviews_array.push(mapped_review)
-			# end
-			@shelves_array
 		end
 
 end

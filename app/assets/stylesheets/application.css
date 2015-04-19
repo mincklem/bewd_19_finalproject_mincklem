@@ -140,12 +140,6 @@ margin: 10px;
 
 }
 
-#monkey_themes {
-	text-align: center;
-	position: relative;
-	padding: 40px;
-}
-
 .single_result {
 	display: block;
 	margin:20px;
@@ -171,6 +165,26 @@ margin: 10px;
  	 width: 150px;
 
 }
+#shelves_chart_box {
+	text-align: center;
+	position: relative;
+	padding: 40px;
+}
+
+#shelvesChart {
+position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  margin-bottom: 40px;
+}
+
+#monkey_themes {
+	text-align: center;
+	position: relative;
+	padding: 40px;
+}
+
 
 #themesChart {
 position: absolute;

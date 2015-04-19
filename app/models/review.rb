@@ -5,4 +5,5 @@ class Review < ActiveRecord::Base
 	def self.search_for 
 	end
 
+	
 end

@@ -65,7 +65,8 @@ class ReviewsController < ApplicationController
 	  	@user_cloud_prefs = [stars: params[:stars], count: params[:count], user_excludes: params[:user_excludes]]
   		#pass to wordcounter
 		new_count = WordCloud::WordCount.new(@user_cloud_prefs)
-		@top_terms = new_count.get_reviews_by_stars
+		@isbn = session[:isbn]
+		@top_terms = new_count.get_reviews_by_stars(@isbn)
 		@arr = []
 		@top_terms.each do |k,v|
 		  @arr << {:text => k, :weight => v}
@@ -80,7 +81,7 @@ class ReviewsController < ApplicationController
   end
 
   def monkey
-  	# @isbn = params[:isbn]
+  	# @isbn = session[:isbn]
   	# puts @isbn
   	@reviews = Review.where(
 	  	"isbn LIKE :query", 
