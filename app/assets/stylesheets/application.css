@@ -18,10 +18,38 @@
 body {
 	margin: 0 auto;
 	width: 100%;
+	font-family: 'Lato', sans-serif !important;
+	font-size: 1.5em !important;
+}
+
+h1 {
+	margin-bottom: 20px!important;
 }
 
 .container-fluid {
 	padding: 0px !important;
+}
+
+.login_container {
+	text-align: center
+}
+
+.login_box {
+  width: 300px;
+  /* position: relative; */
+  display: inline-block;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
+	-moz-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
+	box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
+ 
+}
+
+.login_box .actions {
+	margin: 5px;
+	margin-bottom: 10px;
 }
 
 .mainContainer {
@@ -35,25 +63,30 @@ body {
 
  .header {
  	width: 100%;
- 	background-color: #BE9954;
+ 	background-color: #548BBE;
  	font-size: 20px;
+ 	height: 100px;
  	padding:20px;
  	color: white;
- 	height: 75px;
  	-webkit-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
 	-moz-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
 	box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
  }
 
  .buttonBox{
-height: auto;
-width: auto;
-margin: 10px;
+	height: auto;
+	width: auto;
+	margin: 10px;
  }
 
  .btn {
  	border-radius:5px !important;
  	margin: 5px;
+ }
+
+ .title {
+ 	display: inline-block;
+ 	font-size: 25px
  }
 
 .wordCloudsBox {
@@ -65,25 +98,48 @@ margin: 10px;
 	-moz-transition: all .2s ease-in-out;
 }
 
+.cloudParams {
+	margin:20px;
+}
+
+.findISBN {
+	position: absolute;
+	display: inline-block;
+	 font-size: 18px;
+	   color:black;
+	   right: 0px;
+	     margin-right: 20px;
+}
+
+.findISBN label {
+color:white;
+}
+
+.logo {
+	height: 30px;
+	width: 30px;
+}
+
 .login {
-	color: white;
+  color: white;
   display: inline-block;
   position: absolute;
   right: 0px;
   padding-right: 20px;
+  top: 60px;
+}
+
+.login a {
+	color:white;
 }
 
 .word {
 	display: inline-block
 }
 
-.jqcloud {
-
-}
-
 .bookCover {
-	height: 300px;
-	width: 200px;
+  	height: 170px;
+  	width: 120px;
 	position: relative;
 	display:inline-block;
 }
@@ -104,10 +160,15 @@ margin: 10px;
 	border-bottom-left-radius: 5px;
 }
 
+.bookCover img {
+  width: 120px;
+   height: 170px;
+}
+
 .chosenTitle {
 	position: relative;
 	height: auto;
-	display: none;
+/*	display: none;*/
 	padding: 20px;
 	-webkit-transition: all 1s ease-in-out;
  	 -moz-transition: all 1s ease-in-out;
@@ -124,6 +185,21 @@ margin: 10px;
   	display: inline-block;
 
 }
+
+.spinnerBox {
+	position: absolute;
+  display: block;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+    top: 100px;
+  width: 30px;
+}
+
+#rolled_shelves, #all_shelves {
+	position: relative
+}
+
 
 .fa-pulse {
 	margin: 0 auto !important;
@@ -171,28 +247,54 @@ margin: 10px;
 	padding: 40px;
 }
 
-#shelvesChart {
-position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  margin-bottom: 40px;
+.shelvesChart {
+	position: relative;
+  	margin: 0 auto;
+  	left: 0;
+  	right: 0;
+  	margin-bottom: 40px;
+  	width: 900px !important;
+  	height: 600px !important;
+  	  display: inline-block;
 }
 
-#monkey_themes {
+#monkey_keywords {
 	text-align: center;
 	position: relative;
 	padding: 40px;
 }
 
 
-#themesChart {
-position: absolute;
+#keywordsChart {
+	position: absolute;
   margin: 0 auto;
   left: 0;
   right: 0;
   margin-bottom: 40px;
+    margin-top: 40px;
 }
+
+.shelves_table {
+	width: 20%;
+}
+
+.searchReviews {
+  display: inline-block;
+  right: 30px;
+  top: 350px;
+  position: absolute;
+}
+
+.shelves_error {
+	  width: 500px;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
 
 /*w10, w9, w8, w7, w6, w5, w4, w3, w2, w1*/
 

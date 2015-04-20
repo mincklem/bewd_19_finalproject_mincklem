@@ -48,6 +48,8 @@ $(".wordCloudsBox").children().remove();
 
 function shelvesCount(h){
     $("#shelvesTab").click(function(){
+        // show loader
+        $(".fa-pulse").css("visibility", "visible");
         console.log("getting shelves");
         console.log(isbn);
         $.ajax({
@@ -56,10 +58,19 @@ function shelvesCount(h){
            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
            data: {"isbn":isbn}, 
            success: function(response) {
-            console.log(response);
-            graphShelves(response)
-                   }
-                });        
+                console.log(response);
+                if (response[0] == "false") {
+                    console.log("not graphing");
+                    $("#shelves_chart_box").css("display", "none");
+                    $("#shelves").append("<div class='shelves_error'><h1>Sorry, Goodreads shelves counts are insufficient for this title, try another.</h1></div>");    
+                } else  {
+                    console.log("graphing")
+                    graphAllShelves(response[0]);
+                    graphRollShelves(response[1]);
+                    tableShelves(response)
+                }
+            }
+        });        
     })
 }
 
@@ -72,6 +83,8 @@ function storeISBN() {
 
 function monkeyCall(r){
     $("#themesTab").click(function(){
+    // show loader
+    $(".fa-pulse").css("visibility", "visible");
     // get reviews text
     $.ajax({
         type: "POST", 
@@ -149,24 +162,33 @@ function showChoice(){
 
 }
 
-function graphShelves(result){
+function tableShelves(result){
+    $.each(result[1], function(i, val){
+        $("#rolled_shelves_table").append("<tbody><td>"+i+"</td><td>"+val+"</td></tbody>");
+    });
+    $.each(result[0], function(i, val){
+        $("#all_shelves_table").append("<tbody><td>"+i+"</td><td>"+val+"</td></tbody>");
+    });
+}
+
+function graphAllShelves(result){
     console.log("graphing");
     var data_labels = [];
     var data_vals = [];
     $.each(result, function(i, val){
-        console.log(i);
-        console.log(val);
         data_labels.push(i);
         data_vals.push(val);
     });
-    for(var i = 0; i < data_vals.length; i++)
-        data_vals[i] = parseInt(data_vals[i], 10);
+    // for(var i = 0; i < data_vals.length; i++){
+    //     data_vals[i] = parseInt(data_vals[i], 10);
+    //     console.log(data_vals[i])
+    // }
     var data = {
         labels: data_labels,
         datasets: [
             {
                 label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
+                fillColor: "#1B4171",
                 strokeColor: "#1B4171",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
@@ -209,13 +231,92 @@ function graphShelves(result){
     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
 };
-        // Get context with jQuery - using jQuery's .get() method.
-    var ctx = $("#shelvesChart").get(0).getContext("2d");
+    // Get context with jQuery - using jQuery's .get() method.
+    var ctx = $("#allShelvesChart").get(0).getContext("2d");
     // This will get the first returned node in the jQuery collection.
     var myNewChart = new Chart(ctx);
     // create chart
-    var myBarChart = new Chart(ctx).Bar(data, options);
-    
+    if (data_vals.length > 1) {
+          var myBarChart = new Chart(ctx).Bar(data, options);
+            console.log(myBarChart);
+            console.log(data_vals);
+            console.log(data_labels);
+     $(".fa-pulse").css("visibility", "hidden");
+    }; 
+}
+
+function graphRollShelves(result) {
+    console.log("graphing");
+    var data_labels = [];
+    var data_vals = [];
+    $.each(result, function(i, val){
+        data_labels.push(i);
+        data_vals.push(val);
+    });
+    // for(var i = 0; i < data_vals.length; i++){
+    //     data_vals[i] = parseInt(data_vals[i], 10);
+    //     console.log(data_vals[i])
+    // }
+    var data = {
+        labels: data_labels,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "#1B4171",
+                strokeColor: "#1B4171",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: data_vals
+            }
+        ]
+    };
+     var options = {
+    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+    scaleBeginAtZero : true,
+
+    //Boolean - Whether grid lines are shown across the chart
+    scaleShowGridLines : true,
+
+    //String - Colour of the grid lines
+    scaleGridLineColor : "rgba(0,0,0,.05)",
+
+    //Number - Width of the grid lines
+    scaleGridLineWidth : 1,
+
+    //Boolean - Whether to show horizontal lines (except X axis)
+    scaleShowHorizontalLines: true,
+
+    //Boolean - Whether to show vertical lines (except Y axis)
+    scaleShowVerticalLines: true,
+
+    //Boolean - If there is a stroke on each bar
+    barShowStroke : true,
+
+    //Number - Pixel width of the bar stroke
+    barStrokeWidth : 2,
+
+    //Number - Spacing between each of the X value sets
+    barValueSpacing : 5,
+
+    //Number - Spacing between data sets within X values
+    barDatasetSpacing : 1,
+
+    //String - A legend template
+    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+};
+    // Get context with jQuery - using jQuery's .get() method.
+    var ctx = $("#rollShelvesChart").get(0).getContext("2d");
+    // This will get the first returned node in the jQuery collection.
+    var myNewChart = new Chart(ctx);
+    // create chart
+    if (data_vals.length > 1) {
+          var myBarChart = new Chart(ctx).Bar(data, options);
+            console.log(myBarChart);
+            console.log(data_vals);
+            console.log(data_labels);
+     $(".fa-pulse").css("visibility", "hidden");
+    }; 
 }
 
 function graphMonkey(result) {
@@ -229,13 +330,11 @@ function graphMonkey(result) {
     // convert string array to int array
     for(var i = 0; i < data_vals.length; i++)
         data_vals[i] = parseFloat(data_vals[i], 10);
-    console.log(data_labels);
-    console.log(data_vals);
     var data = {
         labels: data_labels,
         datasets: [
                 {
-                    label: "My First dataset",
+                    label: "Goodreads Shelves",
                     fillColor: "rgba(220,220,220,0.2)",
                     strokeColor: "#1B4171",
                     pointColor: "rgba(220,220,220,1)",
@@ -244,16 +343,6 @@ function graphMonkey(result) {
                     pointHighlightStroke: "#1B4171",
                     data: data_vals
                 },
-                // {   
-                //     label: "My Second dataset",
-                //     fillColor: "rgba(151,187,205,0.2)",
-                //     strokeColor: "rgba(151,187,205,1)",
-                //     pointColor: "rgba(151,187,205,1)",
-                //     pointStrokeColor: "#fff",
-                //     pointHighlightFill: "#fff",
-                //     pointHighlightStroke: "rgba(151,187,205,1)",
-                //     data: [28, 48, 40, 19, 96, 27, 100]
-                // }
             ]
         };
     var options = {
@@ -317,6 +406,7 @@ function graphMonkey(result) {
     var myNewChart = new Chart(ctx);
     // create chart
     var myRadarChart = new Chart(ctx).Radar(data, options);
+     $(".fa-pulse").css("visibility", "hidden");
 }
 
 showChoice();

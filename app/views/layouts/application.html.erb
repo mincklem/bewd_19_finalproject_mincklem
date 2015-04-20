@@ -8,7 +8,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
@@ -18,32 +18,25 @@
 <body>
 <div class="container-fluid">
 		 <div class="header">
-		Consumer Reviews Dashboard
-
-      <div class="login">
+    <!--     <div class="logo"><img src="../../../app/assets/images/rh.png"></div> -->
+		    <div class="title">Reader Reviews Dashboard</div>
+        <div class="findISBN">
+          <%= form_tag "/search", method: "GET" do |f| %>
+          <%= label_tag(:search, "Find a Book:") %>
+          <%= text_field_tag(:search, params[:search]) %>
+          <%= submit_tag("Search") %>
+          <% end %>
+        </div>
+        <div class="login">
           <% if user_signed_in? %>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
           <% else %>
             <%= link_to('Login', new_user_session_path)  %>  
           <% end %>
-      </div>
-
+        </div>
 	 </div>
-
-   <div class="mainContainer">
-      <div class="chosenTitle">
-          <div class="bookCover"></div>
-          <div class="bookDescription"> DESCRIPTION</div>
-      </div>
-     <div class="findISBN">
-        <%= form_tag "/search", method: "GET" do |f| %>
-      <%= label_tag(:search, "Find ISBN:") %>
-      <%= text_field_tag(:search, params[:search]) %>
-      <%= submit_tag("Search") %>
-    <% end %>
-
+<div class="mainContainer">
 <%= yield %>
-</div>
 </div>
 </body>
 </html>

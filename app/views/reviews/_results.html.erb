@@ -21,7 +21,12 @@
 					<% @returned_books[number]["volumeInfo"]["industryIdentifiers"].each do |this|%>
 						<% if this["type"] == "ISBN_10"%>
 							<p>
-								<%= button_to "Get Reviews", reviews_path, :method => "post", :params => {:choice => "#{this["identifier"]}"} %>
+							<%= button_to "Get Reviews", reviews_path, :method => "post", :params => {
+							:choice => "#{this["identifier"]}",
+							:img => "#{@returned_books[number]["volumeInfo"]["imageLinks"]["smallThumbnail"]}",
+							:title => "#{@returned_books[number]["volumeInfo"]["title"]}",
+							:pub => "#{@returned_books[number]["volumeInfo"]["publisher"]}",
+							:date => "#{@returned_books[number]["volumeInfo"]["publishedDate"]}"}%> 
 							</p>
 						<% else %>
 						<% end %>

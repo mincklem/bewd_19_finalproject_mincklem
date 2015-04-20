@@ -9,13 +9,23 @@ class ShelvesController < ApplicationController
 	  	if session[:isbn]
 		@isbn = session[:isbn]
 		end
-
+		#if book exists in db, delete current records, and repull
 		if Shelf.exists?(isbn:@isbn)
+			Shelf.destroy_all(isbn:@isbn)
 			@search_result = Shelf.count_shelves(@isbn)
+		#if book has not been called before, call and count
 		else
-			Shelf.get_shelves(@isbn)
-			@search_result = Shelf.count_shelves(@isbn)
-
+			#check if goodreads fails to return shelves
+			@status = Shelf.get_shelves(@isbn)
+			#if goodreads fails
+			if @status[:status] == false
+				puts "not counting"
+				@search_result = ["false"]
+			#if goodreads succeeds
+			else	
+				puts "counting"
+				@search_result = Shelf.count_shelves(@isbn)
+			end
 		end
 		
 		@json_shelves = @search_result.to_json

@@ -21,14 +21,6 @@ class String
 	end
 end
 
-class User
-
-	def self.current=(isbn)
-	@current_user = u
-	end
-
-	def self.current
-	@current_user
-	end
-
-end
+def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] || stored_location_for(resource) || shelves_path
+  end

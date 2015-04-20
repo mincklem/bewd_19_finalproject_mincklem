@@ -1,6 +1,6 @@
 
 class ReviewsController < ApplicationController
-	# before_action :authenticate_user!
+	before_action :authenticate_user!
 	respond_to :html, :xml, :json
 
   	include ReviewApi
@@ -14,6 +14,13 @@ class ReviewsController < ApplicationController
   		@reviews = Review.where(
   		"cast(isbn as text) LIKE :query OR review_text LIKE :query OR title LIKE :query", 
   		query: "%#{params[:isbn]}%")
+  		@img = session[:img]
+  		@title = session[:title]
+  		@pub = session[:pub]
+  		@date = session[:date]
+  		puts @title
+  		puts @pub
+  		puts @date
   	end
     def show
   	@review = Review.find(params[:id])
@@ -24,40 +31,44 @@ class ReviewsController < ApplicationController
   	end
 
   	def create
-  			puts "firing"
-			@isbn = params[:choice]
-			puts @isbn
-			  #get isbn from session if it is blank
-			  params[:choice] ||= session[:isbn]
-			  #save isbn to session for future requests
-			  session[:isbn] = params[:choice]
-			  # User.current = params[:choice]
-			if @isbn.length==10 || @isbn.length==13 && @isbn.numeric?
-				puts "That's a nice, clean isbn."
-				api_reviews = ReviewApi::CalledReviews.new
-				@reviews_array = api_reviews.call_reviews(@isbn)
-				@reviews_array.each_with_index do |this|
-						isbn = this[:isbn]
-						title = this[:title]
-						review_text = this[:review_text]
-						likes = this[:likes]
-						shelves = this[:shelves]		
-					@added_review = Review.create(isbn: isbn, 
-  						title: title, 
-  						review_text: review_text,
-  						likes: likes,
-  						shelves: shelves,
-						star_rating: rand(0..5))
-				end
-			else
-				puts "That's no good."
-				redirect_to "/"
-				# get_isbn
-			end
+		puts "firing"
+		@isbn = params[:choice]
+		puts @isbn
+		  #get isbn from session if it is blank
+		  params[:choice] ||= session[:isbn]
+		  #save isbn to session for future requests
+		  session[:isbn] = params[:choice]
+		  # User.current = params[:choice]
+		
+		session[:img] = params[:img]
+		session[:title] = params[:title]
 
-			if @added_review.save
-			      redirect_to "/" 
-			  	end
+		if @isbn.length==10 || @isbn.length==13 && @isbn.numeric?
+			puts "That's a nice, clean isbn."
+			api_reviews = ReviewApi::CalledReviews.new
+			@reviews_array = api_reviews.call_reviews(@isbn)
+			@reviews_array.each_with_index do |this|
+					isbn = this[:isbn]
+					title = this[:title]
+					review_text = this[:review_text]
+					likes = this[:likes]
+					shelves = this[:shelves]		
+				@added_review = Review.create(isbn: isbn, 
+						title: title, 
+						review_text: review_text,
+						likes: likes,
+						shelves: shelves,
+					star_rating: rand(0..5))
+			end
+		else
+			puts "That's no good."
+			redirect_to "/"
+			# get_isbn
+		end
+
+		if @added_review.save
+		      redirect_to "/" 
+		  	end
   	end
 
   	def star_rating_filter

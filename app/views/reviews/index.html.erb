@@ -1,6 +1,16 @@
-
-<div class="mainContainer">
-    <div role="tabpanel">
+         <div class="chosenTitle">
+            <div class="bookCover">
+              <%if @img%>
+                <img src="<%=@img%>">
+              <%end%>
+            </div>
+            <div class="bookDescription">
+              <p><%=@title%></p>
+              <p><%=@pub%></p>
+              <p><%=@date%></p>
+            </div>
+        </div>
+  <div role="tabpanel">
       <!-- Nav tabs -->
       <ul id="myTab" class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Reviews</a></li>
@@ -20,20 +30,9 @@
       <%= submit_tag("Search") %>
     <% end %>
   </div>  
-      <div class="submitISBN">
-        <%= form_for @review do |f| %>
-         <p>
-          <%= f.label :isbn %>
-          <%= f.text_field :isbn %>
-        </p>
-         <p>
-          <%= f.submit %>
-         </p>
-        <% end %>
-      </div>
+
   	<%= render 'list' %></div>
       
-
   <div role="tabpanel" aria-labelledby="wordCloudTab" class="tab-pane fade" id="wordCloudPanel">
 		<div class="btn-group" data-toggle="buttons-checkbox">
 			<h2>Filter reviews</h2>
@@ -58,28 +57,66 @@
 		<div class="cloudParams">
 			<p>Exclude words (space separated): <input type="text" name="fname" id="user_excludes"></p>
 			<p>Minimum word frequency: <input type="text" name="fname" id="count_limit" value="4"></p>
-			<p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p>
-			<br><br> 
+			<!-- <p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p> -->
 		</div>
+    <div class="spinnerBox">
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
-			<div class="wordCloudsBox">
+		</div>
+      <div class="wordCloudsBox">
 			</div>
   </div>
   <div role="tabpanel" aria-labelledby="themesTab" class="tab-pane fade" id="themes">
   	<div id="monkey_themes">
-  			
   	</div>
-  	<div id="monkey_keywords"></div>
+  	<div id="monkey_keywords">
   		<h1>MonkeyLearn's Keyword Analysis</h1>
       <canvas id="keywordsChart" width="1000px" height="600px"></canvas>
+      <div class="spinnerBox">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
+      </div>
   	</div>
+  </div>
   <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">
-    <div id="shelves_chart_box"></div>
-      <canvas id="shelvesChart" width="1000px" height="600px"></canvas>
+      <div id="shelves_chart_box" class=".container-fluid">
+          <h1>Goodreads Shelves - Category Roll-Ups</h1>
+          <div id="rolled_shelves">
+             <canvas id="rollShelvesChart" class="shelvesChart" width="900px" height="600px"></canvas>
+             <div class="spinnerBox">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
+              </div>
+          </div>
+        <h1>Goodreads Shelves - All Shelves</h1>
+         <div id="all_shelves">
+            <canvas id="allShelvesChart" class="shelvesChart" width="900px" height="600px"></canvas>
+             <div class="spinnerBox">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
+              </div>
+          </div>
+      <div class="col-sm-4">
+            <h2>Category Roll-Ups</h2>
+            <table id="rolled_shelves_table"class="table table-bordered table-hover shelves_table" data-sort-name="val" data-sort-order="desc">
+                <thead>
+                  <tr>
+                    <th data-sortable="true">Shelf Name</th>
+                    <th data-sortable="true">Count</th>
+                  </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-sm-4">
+            <h2>All Shelves</h2>
+            <table id="all_shelves_table" class="table table-bordered table-hover shelves_table" data-sort-name="val" data-sort-order="desc">
+                <thead>
+                  <tr>
+                    <th data-sortable="true">Shelf Name</th>
+                    <th data-sortable="true">Count</th>
+                  </tr>
+                </thead>
+            </table>
+          </div>
+      </div>
+      
     </div>
   </div>
 </div>
 
-
-
-	</div>
