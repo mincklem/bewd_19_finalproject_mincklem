@@ -144,7 +144,7 @@ class Shelf < ActiveRecord::Base
 	  		:Chic_Lit=>@chic_count
   		}
   		puts @search_result
-  		@returned_result = [@all_hash, @search_result]
+  		@returned_result = [@all_hash.sort_by {|_key, value| value}.reverse.to_h, @search_result.sort_by {|_key, value| value}.reverse.to_h]
   		puts @returned_result
   		@returned_result
   	end

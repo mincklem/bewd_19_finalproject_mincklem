@@ -16,7 +16,7 @@
         <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Reviews</a></li>
         <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
         <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
-        <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Shelves</a></li>
+        <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Goodreads Shelves</a></li>
       </ul>
     </div>
 
@@ -59,7 +59,7 @@
 			<p>Minimum word frequency: <input type="text" name="fname" id="count_limit" value="4"></p>
 			<!-- <p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p> -->
 		</div>
-    <div class="spinnerBox">
+    <div class="spinnerBox" id="cloud_spinner">
 			<i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
 		</div>
       <div class="wordCloudsBox">
@@ -71,7 +71,7 @@
   	<div id="monkey_keywords">
   		<h1>MonkeyLearn's Keyword Analysis</h1>
       <canvas id="keywordsChart" width="1000px" height="600px"></canvas>
-      <div class="spinnerBox">
+      <div class="spinnerBox" id="monkey_spinner">
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
       </div>
   	</div>

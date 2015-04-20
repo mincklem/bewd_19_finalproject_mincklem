@@ -63,10 +63,10 @@ h1 {
 
  .header {
  	width: 100%;
- 	background-color: #548BBE;
+ 	background-color: #325C83;
  	font-size: 20px;
- 	height: 100px;
- 	padding:20px;
+ 	height: 75px;
+ 	padding:15px;
  	color: white;
  	-webkit-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
 	-moz-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
@@ -107,8 +107,9 @@ h1 {
 	display: inline-block;
 	 font-size: 18px;
 	   color:black;
-	   right: 0px;
-	     margin-right: 20px;
+	right: 0px;
+	margin-right: 20px;
+	margin-top: 5px;
 }
 
 .findISBN label {
@@ -121,16 +122,13 @@ color:white;
 }
 
 .login {
-  color: white;
-  display: inline-block;
+  display: block;
   position: absolute;
-  right: 0px;
-  padding-right: 20px;
-  top: 60px;
+  right: 20px;
+  top: 80px;
 }
 
 .login a {
-	color:white;
 }
 
 .word {
@@ -184,6 +182,14 @@ color:white;
 	  position: relative;
   	display: inline-block;
 
+}
+
+#cloud_spinner {
+	position: relative
+}
+
+#monkey_spinner {
+	  top: 180px;
 }
 
 .spinnerBox {
@@ -281,7 +287,7 @@ color:white;
 .searchReviews {
   display: inline-block;
   right: 30px;
-  top: 350px;
+  top: 300px;
   position: absolute;
 }
 
@@ -294,6 +300,58 @@ color:white;
   margin: 0 auto;
   margin-top: 50px;
 }
+
+.fa-arrow-up {
+	  top: 20px;
+  	right: 370px;
+	position:absolute;
+	display: block;
+}
+
+.welcomeBox {
+	width: 75%;
+	position: absolute;
+	display: inline-block;
+	margin: 0 auto;
+	right: 0;
+	left: 0;
+}
+
+.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
 
 
 /*w10, w9, w8, w7, w6, w5, w4, w3, w2, w1*/

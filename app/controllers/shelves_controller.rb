@@ -10,8 +10,9 @@ class ShelvesController < ApplicationController
 		@isbn = session[:isbn]
 		end
 		#if book exists in db, delete current records, and repull
-		if Shelf.exists?(isbn:@isbn)
-			Shelf.destroy_all(isbn:@isbn)
+		if Shelf.exists?(isbn: @isbn)
+			puts "Exists already"
+			Shelf.destroy_all(isbn: @isbn)
 			@search_result = Shelf.count_shelves(@isbn)
 		#if book has not been called before, call and count
 		else

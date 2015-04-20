@@ -64,7 +64,7 @@ function shelvesCount(h){
                     $("#shelves_chart_box").css("display", "none");
                     $("#shelves").append("<div class='shelves_error'><h1>Sorry, Goodreads shelves counts are insufficient for this title, try another.</h1></div>");    
                 } else  {
-                    console.log("graphing")
+                    console.log("graphing");
                     graphAllShelves(response[0]);
                     graphRollShelves(response[1]);
                     tableShelves(response)
@@ -179,10 +179,6 @@ function graphAllShelves(result){
         data_labels.push(i);
         data_vals.push(val);
     });
-    // for(var i = 0; i < data_vals.length; i++){
-    //     data_vals[i] = parseInt(data_vals[i], 10);
-    //     console.log(data_vals[i])
-    // }
     var data = {
         labels: data_labels,
         datasets: [
@@ -253,10 +249,6 @@ function graphRollShelves(result) {
         data_labels.push(i);
         data_vals.push(val);
     });
-    // for(var i = 0; i < data_vals.length; i++){
-    //     data_vals[i] = parseInt(data_vals[i], 10);
-    //     console.log(data_vals[i])
-    // }
     var data = {
         labels: data_labels,
         datasets: [
@@ -310,13 +302,13 @@ function graphRollShelves(result) {
     // This will get the first returned node in the jQuery collection.
     var myNewChart = new Chart(ctx);
     // create chart
-    if (data_vals.length > 1) {
+    // if (data_vals.length > 1) {
           var myBarChart = new Chart(ctx).Bar(data, options);
             console.log(myBarChart);
             console.log(data_vals);
             console.log(data_labels);
      $(".fa-pulse").css("visibility", "hidden");
-    }; 
+    // }; 
 }
 
 function graphMonkey(result) {
