@@ -95,8 +95,7 @@ class ReviewsController < ApplicationController
   	@isbn = session[:isbn]
   	puts @isbn
   	@reviews = Review.where(
-	  	"isbn LIKE :query", 
-	  	query: "%#{@isbn}%")
+	  	"isbn LIKE '%#{@isbn}%'")
   	puts @reviews
   	@all_reviews_text = []
   	@reviews.each do |review|
