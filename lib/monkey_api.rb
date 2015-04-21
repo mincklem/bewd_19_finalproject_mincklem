@@ -1,7 +1,7 @@
 class Monkey
 	def monkey_theme(reviews)
 		@reviews = reviews
-		uri = URI.parse("https://api.monkeylearn.com/v2/classifiers/cl_rizNHGx2/classify/?sandbox=1")
+		uri = URI.parse("//api.monkeylearn.com/v2/classifiers/cl_rizNHGx2/classify/?sandbox=1")
 		http = Net::HTTP.new(uri.host, uri.port)
 		http.use_ssl = true
 		request = Net::HTTP::Post.new(uri.request_uri)
@@ -18,7 +18,7 @@ class Monkey
 
 	def monkey_keywords (reviews)
 		@reviews = reviews 
-			uri = URI.parse("https://api.monkeylearn.com/v2/extractors/ex_y7BPYzNG/extract/")
+			uri = URI.parse("//api.monkeylearn.com/v2/extractors/ex_y7BPYzNG/extract/")
 			http = Net::HTTP.new(uri.host, uri.port)
 			http.use_ssl = true
 			request = Net::HTTP::Post.new(uri.request_uri)

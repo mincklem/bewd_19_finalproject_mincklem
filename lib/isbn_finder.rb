@@ -3,7 +3,7 @@
 
 module ISBN
 	  def self.find_isbn(user_search)
-	    results = JSON.load RestClient.get "https://www.googleapis.com/books/v1/volumes?q=#{user_search}"
+	    results = JSON.load RestClient.get "//www.googleapis.com/books/v1/volumes?q=#{user_search}"
 	    @books = results["items"]
 	    return results["items"]
 	  end
