@@ -180,7 +180,7 @@ function graphAllShelves(result){
         data_vals.push(val);
     });
     var data = {
-        labels: data_labels,
+        labels: data_labels.slice(0,20),
         datasets: [
             {
                 label: "My First dataset",
@@ -188,7 +188,7 @@ function graphAllShelves(result){
                 strokeColor: "#1B4171",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: data_vals
+                data: data_vals.slice(0,20)
             }
         ]
     };

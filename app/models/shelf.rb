@@ -28,9 +28,11 @@ class Shelf < ActiveRecord::Base
 		@all_shelves = Shelf.where(isbn: @isbn)
 		@all_hash = {}
 		@all_shelves.each do |this|
-			@shelf = this.shelves
-			@val = this.value
-			@all_hash[:"#{@shelf}"] = @val
+			if (this.shelves != "to-read") && (this.shelves !~ /\d/)  && (this.shelves != "to read")
+           @shelf = this.shelves
+            @val = this.value
+            @all_hash[:"#{@shelf}"] = @val
+      end
 		end
 		puts @all_hash
 		#Category Roll-up Counts
