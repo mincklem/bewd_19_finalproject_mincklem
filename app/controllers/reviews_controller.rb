@@ -92,8 +92,8 @@ class ReviewsController < ApplicationController
   end
 
   def monkey
-  	# @isbn = session[:isbn]
-  	# puts @isbn
+  	@isbn = session[:isbn]
+  	puts @isbn
   	@reviews = Review.where(
 	  	"isbn LIKE :query", 
 	  	query: "%#{@isbn}%")
@@ -114,17 +114,9 @@ class ReviewsController < ApplicationController
 		puts @returned_books
   end
 
-#editing and saving the update in the database - edit/update
-  	def edit
-  	end
+  def welcome
 
-  	def update 
-  	end
-
-  def destroy
   end
-##################################################  Standard Methods
-
 end
 
 class ChartsController < ApplicationController
