@@ -92,10 +92,10 @@ class ReviewsController < ApplicationController
   end
 
   def monkey
-  	@isbn = session[:isbn]
-  	puts @isbn
-  	@reviews = Review.where(
-	  	"isbn LIKE '%#{@isbn}%'")
+  	# @isbn = session[:isbn]
+  	# puts @isbn
+  	# @reviews = Review.where("isbn LIKE '%#{@isbn}%'")
+  	@reviews = Review.all
   	puts @reviews
   	@all_reviews_text = []
   	@reviews.each do |review|
