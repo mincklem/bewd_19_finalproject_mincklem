@@ -50,6 +50,8 @@ class Shelf < ActiveRecord::Base
   		@ser_count = 0
   		@ya_count = 0
   		@chic_count = 0
+      @child_count = 0
+      @hist_count = 0
 
   		#Category Roll-up search functions
 
@@ -130,6 +132,17 @@ class Shelf < ActiveRecord::Base
   			@chic_count = @chic_count + this.value.to_i
   			puts this.value.to_i
   		end
+      @child = Shelf.where(isbn: @isbn).where("shelves LIKE '%child%' OR shelves LIKE '%kid%'")
+      @child.each do |this|
+        @child_count = @child_count + this.value.to_i
+        puts this.value.to_i
+      end
+       @hist = Shelf.where(isbn: @isbn).where("shelves LIKE '%hist%'")
+      @hist.each do |this|
+        @hist_count = @hist_count + this.value.to_i
+        puts this.value.to_i
+      end
+      
 
   		@search_result = {:Science_Fiction => @sci_count, 
   			:Romance => @rom_count,
@@ -143,7 +156,9 @@ class Shelf < ActiveRecord::Base
 	  		:Classic=>@class_count,
 	  		:Series=>@ser_count,
 	  		:Young_Adult=>@ya_count,
-	  		:Chic_Lit=>@chic_count
+	  		:Chic_Lit=>@chic_count,
+        :Childrens=>@child_count,
+        :History=>@hist_count
   		}
   		puts @search_result
   		@returned_result = [@all_hash.sort_by {|_key, value| value}.reverse.to_h, @search_result.sort_by {|_key, value| value}.reverse.to_h]
