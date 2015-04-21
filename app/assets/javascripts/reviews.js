@@ -67,6 +67,7 @@ function shelvesCount(h){
                     console.log("graphing");
                     graphAllShelves(response[0]);
                     graphRollShelves(response[1]);
+                    $(".shelves_table tbody").remove();
                     tableShelves(response)
                 }
             }
