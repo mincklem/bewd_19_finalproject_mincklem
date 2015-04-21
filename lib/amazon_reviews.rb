@@ -9,7 +9,7 @@ class Amazon
 		time = Time.now.utc.iso8601.chomp
 		puts time
 		1.times do | page_num |
-			amz_API = "//webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemLookup&ResponseGroup=Reviews
+			amz_API = "https://webservices.amazon.com/onca/xml?Service=AWSECommerceService&Operation=ItemLookup&ResponseGroup=Reviews
 			  &IdType=ISBN&ItemId=#{isbn}&AssociateTag=5890-8964-3068&AWSAccessKeyId=AKIAIZQPE2FGSZWVC53Q&Timestamp=#{time}&Signature=Htn3p9CQ/sHUK0ew3pr0EHhUMWO/S/VNccN+JikX"
 			amz_raw_output = RestClient.get(amz_API)
 			amz_json_output = JSON.load(amz_raw_output)

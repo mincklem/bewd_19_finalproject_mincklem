@@ -127,7 +127,7 @@ function monkeyKeyWords(response){
 function monkeyThemes(response){
     var reviews = response
         $.ajax({
-        url : "//api.monkeylearn.com/v2/extractors/ex_y7BPYzNG/extract/",
+        url : "https://api.monkeylearn.com/v2/extractors/ex_y7BPYzNG/extract/",
         type : "POST",
         headers: {
             "Authorization": "token 935676726a9c5dee46805e9890680450e1132ff4",

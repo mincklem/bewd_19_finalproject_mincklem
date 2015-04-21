@@ -6,7 +6,7 @@ module ReviewApi
 			@isbn = clean_isbn
 			puts @isbn
 			#SAMPLING FROM REDDIT 
-			response = JSON.load(RestClient.get('//www.reddit.com/.json'))
+			response = JSON.load(RestClient.get('https://www.reddit.com/.json'))
 	  		response["data"]["children"].each do |rev|
 	    		mapped_review = {isbn: rev["data"]["created"],
 	    			title: rev["data"]["author"], 
