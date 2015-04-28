@@ -314,6 +314,7 @@ function graphRollShelves(result) {
 
 function graphMonkey(result) {
     // breakout results for graphing
+    console.log(result);
     var data_labels = [];
     var data_vals = [];
     $.each(result.result[0], function(i, val){
