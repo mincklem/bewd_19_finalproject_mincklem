@@ -349,7 +349,7 @@ function graphMonkey(result) {
     scaleShowLabels : false,
 
     // Boolean - Whether the scale should begin at zero
-    scaleBeginAtZero : false,
+    scaleBeginAtZero : true,
 
     //String - Colour of the angle line
     angleLineColor : "rgba(0,0,0,.1)",

@@ -38,8 +38,6 @@ class ReviewsController < ApplicationController
 		  params[:choice] ||= session[:isbn]
 		  #save isbn to session for future requests
 		  session[:isbn] = params[:choice]
-		  # User.current = params[:choice]
-		
 		session[:img] = params[:img]
 		session[:title] = params[:title]
 
