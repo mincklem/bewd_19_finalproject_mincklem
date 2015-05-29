@@ -34,6 +34,13 @@ h1 {
 	text-align: center
 }
 
+#quickDash {
+	width: 100%;
+	height: 1000px;
+	background-color: gray;
+	position: relative
+}
+
 .login_box {
   width: 300px;
   /* position: relative; */
@@ -226,12 +233,10 @@ color:white;
 }
 
 .single_result {
-	display: block;
-	margin:20px;
-	height: 240px;
-	position: relative;
-	border-bottom: 1px solid gray;
-	  padding-top: 15px;
+  display: block;
+  margin: 20px;
+  height: 150px;
+  position: relative;
 
 }
 

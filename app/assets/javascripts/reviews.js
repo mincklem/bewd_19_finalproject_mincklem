@@ -33,7 +33,7 @@ $(document).ready(function(){
 			   "user_excludes":user_excludes},
 			   success: function(response) {
 			   	console.log(response);
-                    makeCloud(response);
+                makeCloud(response);
 			   }
 		 	});
 		});
@@ -97,8 +97,6 @@ function monkeyCall(r){
         monkeyKeyWords(response)
                }
             });
-
-    // 
     });
 }
 

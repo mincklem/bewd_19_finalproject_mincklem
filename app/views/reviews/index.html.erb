@@ -1,19 +1,42 @@
+
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+    var shr = document.createElement('script');
+    shr.setAttribute('data-cfasync', 'false');
+    shr.src = '//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js';
+    shr.type = 'text/javascript'; shr.async = 'true';
+    shr.onload = shr.onreadystatechange = function() {
+      var rs = this.readyState;
+      if (rs && rs != 'complete' && rs != 'loaded') return;
+      var site_id = 'a814ccd3f7a22afc56e789dce5749994';
+      try { Shareaholic.init(site_id); } catch (e) {}
+    };
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(shr, s);
+  })();
+//]]>
+</script>
+
+
+
          <div class="chosenTitle">
             <div class="bookCover">
               <%if @img%>
                 <img src="<%=@img%>">
               <%end%>
             </div>
-<!--             <div class="bookDescription">
+            <div class="bookDescription">
               <p><%=@title%></p>
-              <p><%=@pub%></p>
+              <p><%=@author%></p>
               <p><%=@date%></p>
-            </div> -->
+            </div>
         </div>
+        <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='17925372'></div>
   <div role="tabpanel">
       <!-- Nav tabs -->
       <ul id="myTab" class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Reviews</a></li>
+        <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Summary</a></li>
         <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
         <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
         <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Goodreads Shelves</a></li>
@@ -23,15 +46,15 @@
  <!-- Tab panes -->
 <div class="tab-content">
   <div role="tabpanel" aria-labelledby="reviewsTab" class="tab-pane fade in active" id="reviews">
-  <div class="searchReviews">
-    <%= form_tag "/", method: "GET" do |f| %>
-      <%= label_tag(:isbn, "Search reviews:") %>
-      <%= text_field_tag(:isbn, params[:isbn]) %>
-      <%= submit_tag("Search") %>
-    <% end %>
-  </div>  
-
-  	<%= render 'list' %></div>
+      <div class="searchReviews">
+        <%= form_tag "/", method: "GET" do |f| %>
+          <%= label_tag(:search, "Search reviews:") %>
+          <%= text_field_tag(:search, params[:search]) %>
+          <%= submit_tag("Search") %>
+        <% end %>
+      </div>  
+    <%= render 'quickDash' %>
+  	 <%= render 'list' %></div>
       
   <div role="tabpanel" aria-labelledby="wordCloudTab" class="tab-pane fade" id="wordCloudPanel">
 		<div class="btn-group" data-toggle="buttons-checkbox">

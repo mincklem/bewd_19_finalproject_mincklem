@@ -9,15 +9,14 @@ class ReviewsController < ApplicationController
 
 	def index
   		@review = Review.new
-  		# @isbn = params[:isbn]
-  		# puts @isbn
-  		@reviews = Review.where(
-  		"cast(isbn as text) LIKE :query OR review_text LIKE :query OR title LIKE :query", 
-  		query: "%#{params[:isbn]}%")
-  		@img = session[:img]
-  		@title = session[:title]
-  		@pub = session[:pub]
-  		@date = session[:date]
+  		@isbn = session[:isbn]
+  		@reviews = Review.where("(isbn IS #{@isbn}) AND (review_text LIKE :query OR title LIKE :query)", 
+  		query: "%#{params[:search]}%")
+  		@img = params[:img]
+  		@title = params[:title]
+  		@author = params[:author]
+  		@reviews = params[:reviews]
+  		@date = params[:date]
   		puts @title
   		puts @pub
   		puts @date
@@ -44,19 +43,18 @@ class ReviewsController < ApplicationController
 		if @isbn.length==10 || @isbn.length==13 && @isbn.numeric?
 			puts "That's a nice, clean isbn."
 			api_reviews = ReviewApi::CalledReviews.new
-			@reviews_array = api_reviews.call_reviews(@isbn)
+			@gr_reviewsreview_array = api_reviews.gr_reviews(@isbn)
+			@amz_review_array = api_reviews.amz_reviews(@isbn)
+			@reviews_array = @gr_review_array.push(*@amz_review_array)
 			@reviews_array.each_with_index do |this|
 					isbn = this[:isbn]
-					title = this[:title]
+					rating = this[:rating]
 					review_text = this[:review_text]
-					likes = this[:likes]
-					shelves = this[:shelves]		
+					user = this[:user]		
 				@added_review = Review.create(isbn: isbn, 
-						title: title, 
+						title: user, 
 						review_text: review_text,
-						likes: likes,
-						shelves: shelves,
-					star_rating: rand(0..5))
+					star_rating: rating)
 			end
 		else
 			puts "That's no good."
@@ -90,10 +88,8 @@ class ReviewsController < ApplicationController
   end
 
   def monkey
-  	# @isbn = session[:isbn]
-  	# puts @isbn
-  	# @reviews = Review.where("isbn LIKE '%#{@isbn}%'")
-  	@reviews = Review.all
+  	@isbn = session[:isbn]
+  	@reviews = Review.where("isbn LIKE '%#{@isbn}%'")
   	puts @reviews
   	@all_reviews_text = []
   	@reviews.each do |review|
@@ -107,7 +103,8 @@ class ReviewsController < ApplicationController
 
   def search 
 		user_search = params[:search]
-		@returned_books = ISBN.find_isbn(user_search)
+		@json = ISBN.find_isbn(user_search)
+		@returned_books = @json["GoodreadsResponse"]["search"]["results"]["work"]
 		puts @returned_books
   end
 

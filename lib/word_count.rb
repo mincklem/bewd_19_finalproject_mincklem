@@ -19,11 +19,10 @@ module WordCloud
 			@user_excludes = @user_cloud_prefs[0][:user_excludes].downcase.split(' ')
 			@user_excludes.collect{|x| x.strip}
 			if @star_array.nil?
-			reviews = Review.all
+			reviews = Review.where(:isbn => @isbn)
 			else
 			@star_array.map!{ |element| element.gsub(/sb/, '') }
-			reviews = Review.where(:star_rating => @star_array) 
-			# reviews = Review.where(:star_rating => @star_array, :isbn => @isbn) 
+			reviews = Review.where(:star_rating => @star_array, :isbn => @isbn) 
 			end
 			#get review text from each and add to variable
 			reviews.each do |review|

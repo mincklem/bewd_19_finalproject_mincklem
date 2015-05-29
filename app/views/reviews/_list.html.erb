@@ -3,11 +3,9 @@
 		<tr>
 			<th>ID</th>
 			<th>ISBN</th>
-			<th>REVIEW TITLE</th>
-			<th>TEXT</th>
-			<th>Star Rating</th>
-			<th>Shelves</th>
-			<th>Likes</th>
+			<th>REVIEW TEXT</th>
+			<th>USER</th>
+			<th>STAR RATING</th>
 		</tr>
 	</thead>
 	<% @reviews.each do |review| %>
@@ -17,8 +15,7 @@
 	    <td><%= review.title %></td> 
 	    <td><%= review.review_text %></td>
 	    <td><%= review.star_rating %></td>
-	    <td><%= review.shelves %></td>
-	    <td><%= review.likes %></td>
+
 	</tbody>
 	<% end %>
 

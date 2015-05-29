@@ -1,21 +1,36 @@
 module ReviewApi
 	class CalledReviews
 		##reviews only return first 300 characters, but each review sample has a link to the full text, a URL with a specific review ID, which we want.  This function extracts those IDs:
-		def call_reviews(clean_isbn)
-			@reviews_array = []
-			@isbn = clean_isbn
-			puts @isbn
-			#SAMPLING FROM REDDIT 
-			response = JSON.load(RestClient.get('https://www.reddit.com/.json'))
-	  		response["data"]["children"].each do |rev|
-	    		mapped_review = {isbn: rev["data"]["created"],
-	    			title: rev["data"]["author"], 
-	    			review_text: rev["data"]["title"],
-	    			likes: rev["data"]["ups"],
-	    			shelves: rev["data"]["subreddit"]}
-	    		@reviews_array.push(mapped_review)
+		def gr_reviews(isbn)
+			@gr_reviews_array = []
+			@isbn = isbn
+			@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=isbn&result_type=goodreads&page=1"
+			response = JSON.load(RestClient.get(@api_url))
+	  		response.each do |rev|
+	    		mapped_review = {isbn: @isbn,
+	    			rating: rev["rating"],
+	    			review_text: rev["review_text"],
+	    			user: rev["user"],
+	    			review_date: rev["date"]}
+	    		@gr_reviews_array.push(mapped_review)
 			end
-			@reviews_array
+			@gr_reviews_array
+		end
+
+		def amz_reviews(isbn)
+			@amz_reviews_array = []
+			@isbn = isbn
+			@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=isbn&result_type=amazon&page=1"
+			response = JSON.load(RestClient.get(@api_url))
+	  		response.each do |rev|
+	    		mapped_review = {isbn: @isbn,
+	    			rating: rev["rating"],
+	    			review_text: rev["review_text"],
+	    			user: rev["user"],
+	    			review_date: rev["date"]}
+	    		@amz_reviews_array.push(mapped_review)
+			end
+			@amz_reviews_array
 		end
 
 	end
