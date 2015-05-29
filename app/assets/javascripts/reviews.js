@@ -7,7 +7,18 @@ $(document).ready(function(){
 	
 function shareThis(){
          stWidget.addEntry({
-                 "service":"facebook",
+                 "service":"twitter",
+                 "element":document.getElementById('button_1'),
+                 "url":"http://sharethis.com",
+                 "title":"sharethis",
+                 "type":"large",
+                 "text":"ShareThis" ,
+                 "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
+                 "summary":"this is description1"
+         });
+
+         stWidget.addEntry({
+                 "service":"sharethis",
                  "element":document.getElementById('button_1'),
                  "url":"http://sharethis.com",
                  "title":"sharethis",
