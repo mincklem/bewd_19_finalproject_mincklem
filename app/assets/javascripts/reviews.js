@@ -10,7 +10,7 @@ function shareThis(){
                  "service":"twitter",
                  "element":document.getElementById('button_1'),
                  "url":"http://sharethis.com",
-                 "title":"sharethis",
+                 "title":"TWITTER TEXT",
                  "type":"large",
                  "text":"ShareThis" ,
                  "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
@@ -18,10 +18,20 @@ function shareThis(){
          });
 
          stWidget.addEntry({
-                 "service":"sharethis",
+                 "service":"facebook",
                  "element":document.getElementById('button_1'),
                  "url":"http://sharethis.com",
                  "title":"sharethis",
+                 "type":"large",
+                 "text":"FACEBOOK TEXT" ,
+                 "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
+                 "summary":"this is description1"
+         });
+                  stWidget.addEntry({
+                 "service":"pinterest",
+                 "element":document.getElementById('button_1'),
+                 "url":"http://sharethis.com",
+                 "title":"PINTEREST TEXT",
                  "type":"large",
                  "text":"ShareThis" ,
                  "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
