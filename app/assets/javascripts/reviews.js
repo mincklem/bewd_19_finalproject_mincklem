@@ -6,6 +6,7 @@ $(document).ready(function(){
     shareThis();
 	
 function shareThis(){
+         var shelfPNG = 'http://i.imgur.com/52q0CK8.jpg'
          stWidget.addEntry({
                  "service":"twitter",
                  "element":document.getElementById('button_1'),
@@ -24,7 +25,7 @@ function shareThis(){
                  "title":"sharethis",
                  "type":"large",
                  "text":"FACEBOOK TEXT" ,
-                 "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
+                 "image":'https://www.facebook.com/dialog/feed?_path=feed&app_id=487604788070849&redirect_uri=http://modernlibrary.webdev.us.randomhouse.com/Shelf_Builder/&display=popup&link=http://modernlibrary.webdev.us.randomhouse.com/Shelf_Builder/&picture='+shelfPNG+'',
                  "summary":"this is description1"
          });
                   stWidget.addEntry({
