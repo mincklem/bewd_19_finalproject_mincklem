@@ -6,7 +6,7 @@ $(document).ready(function(){
     shareThis();
 	
 function shareThis(){
-         var shelfPNG = 'http://i.imgur.com/52q0CK8.jpg'
+         var shelfPNG = 'https://i.imgur.com/52q0CK8.jpg'
          stWidget.addEntry({
                  "service":"twitter",
                  "element":document.getElementById('button_1'),
