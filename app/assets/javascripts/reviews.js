@@ -3,7 +3,22 @@ $(document).ready(function(){
 	var stars = [];
 	var user_excludes = [];
 	var count;
-	function starButton(){
+    shareThis();
+	
+function shareThis(){
+         stWidget.addEntry({
+                 "service":"facebook",
+                 "element":document.getElementById('button_1'),
+                 "url":"http://sharethis.com",
+                 "title":"sharethis",
+                 "type":"large",
+                 "text":"ShareThis" ,
+                 "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
+                 "summary":"this is description1"
+         });
+}
+
+    function starButton(){
 		// get user star filter
 		$('button[type="button"').click(function(){
 	    	if ($(this).hasClass("selected")) {
