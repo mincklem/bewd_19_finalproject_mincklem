@@ -3,42 +3,6 @@ $(document).ready(function(){
 	var stars = [];
 	var user_excludes = [];
 	var count;
-    shareThis();
-	
-function shareThis(){
-         var shelfPNG = 'https://i.imgur.com/52q0CK8.jpg'
-         stWidget.addEntry({
-                 "service":"twitter",
-                 "element":document.getElementById('button_1'),
-                 "url":"http://sharethis.com",
-                 "title":"TWITTER TEXT",
-                 "type":"large",
-                 "text":"ShareThis" ,
-                 "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-                 "summary":"this is description1"
-         });
-
-         stWidget.addEntry({
-                 "service":"facebook",
-                 "element":document.getElementById('button_1'),
-                 "url":"http://sharethis.com",
-                 "title":"sharethis",
-                 "type":"large",
-                 "text":"FACEBOOK TEXT" ,
-                 "image":'https://www.facebook.com/dialog/feed?_path=feed&app_id=487604788070849&redirect_uri=http://modernlibrary.webdev.us.randomhouse.com/Shelf_Builder/&display=popup&link=http://modernlibrary.webdev.us.randomhouse.com/Shelf_Builder/&picture='+shelfPNG+'',
-                 "summary":"this is description1"
-         });
-                  stWidget.addEntry({
-                 "service":"pinterest",
-                 "element":document.getElementById('button_1'),
-                 "url":"http://sharethis.com",
-                 "title":"PINTEREST TEXT",
-                 "type":"large",
-                 "text":"ShareThis" ,
-                 "image":"http://www.softicons.com/download/internet-icons/social-superheros-icons-by-iconshock/png/256/sharethis_hulk.png",
-                 "summary":"this is description1"
-         });
-}
 
     function starButton(){
 		// get user star filter
