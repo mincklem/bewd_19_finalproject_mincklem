@@ -16,7 +16,7 @@
 
 						<p>
 				<%= button_to "Get Reviews", reviews_path, :method => "post", :params => {
-						:choice => "#{@returned_books[number]["id"]}",
+						:choice => "#{@returned_books[number]["best_book"]["id"]}",
 						:img => "#{@returned_books[number]["best_book"]["image_url"]}",
 						:title =>"#{@returned_books[number]["best_book"]["title"]}" ,
 						:author => "#{@returned_books[number]["best_book"]["author"]["name"]}",

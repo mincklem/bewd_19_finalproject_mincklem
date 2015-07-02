@@ -1,16 +1,18 @@
 module ReviewApi
 	class CalledReviews
-		##reviews only return first 300 characters, but each review sample has a link to the full text, a URL with a specific review ID, which we want.  This function extracts those IDs:
+		
 		def gr_reviews(isbn)
 			@gr_reviews_array = []
 			@isbn = isbn
-			@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=isbn&result_type=goodreads&page=1"
+			@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=book_id&result_type=goodreads&page=1"
 			response = JSON.load(RestClient.get(@api_url))
+			puts response
 	  		response.each do |rev|
 	    		mapped_review = {isbn: @isbn,
 	    			rating: rev["rating"],
 	    			review_text: rev["review_text"],
 	    			user: rev["user"],
+	    			platform: "Goodreads",
 	    			review_date: rev["date"]}
 	    		@gr_reviews_array.push(mapped_review)
 			end
@@ -22,11 +24,13 @@ module ReviewApi
 			@isbn = isbn
 			@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=isbn&result_type=amazon&page=1"
 			response = JSON.load(RestClient.get(@api_url))
+			puts response
 	  		response.each do |rev|
 	    		mapped_review = {isbn: @isbn,
 	    			rating: rev["rating"],
 	    			review_text: rev["review_text"],
 	    			user: rev["user"],
+	    			platform: "Amazon",
 	    			review_date: rev["date"]}
 	    		@amz_reviews_array.push(mapped_review)
 			end
