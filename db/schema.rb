@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702150333) do
+ActiveRecord::Schema.define(version: 20150706204944) do
 
   create_table "isbns", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150702150333) do
     t.datetime "updated_at",  null: false
     t.integer  "isbn"
     t.string   "platform"
+    t.string   "date"
   end
 
   create_table "shelves", force: :cascade do |t|

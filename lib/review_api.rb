@@ -8,7 +8,8 @@ module ReviewApi
 			response = JSON.load(RestClient.get(@api_url))
 			puts response
 	  		response.each do |rev|
-	    		mapped_review = {isbn: @isbn,
+	    		mapped_review = {
+	    			isbn: @isbn,
 	    			rating: rev["rating"],
 	    			review_text: rev["review_text"],
 	    			user: rev["user"],
@@ -22,36 +23,24 @@ module ReviewApi
 		def amz_reviews(isbn)
 			@amz_reviews_array = []
 			@isbn = isbn
-			@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=isbn&result_type=amazon&page=1"
-			response = JSON.load(RestClient.get(@api_url))
-			puts response
-	  		response.each do |rev|
-	    		mapped_review = {isbn: @isbn,
-	    			rating: rev["rating"],
-	    			review_text: rev["review_text"],
-	    			user: rev["user"],
-	    			platform: "Amazon",
-	    			review_date: rev["date"]}
-	    		@amz_reviews_array.push(mapped_review)
+			1.times do |num| 
+				@api_url = "http://www.fanpagelist.com/analytics/reviews.php?api_key=91bee4c36&q=#{@isbn}&search_type=book_id&result_type=amazon&page=#{num+1}"
+				puts @api_url
+				response = JSON.load(RestClient.get(@api_url))
+				puts response
+		  		response.each do |rev|
+		    		mapped_review = {isbn: @isbn,
+		    			rating: rev["rating"],
+		    			review_text: rev["review_text"],
+		    			user: rev["user"],
+		    			platform: "Amazon",
+		    			review_date: rev["date"]}
+		    		@amz_reviews_array.push(mapped_review)
+				end
 			end
 			@amz_reviews_array
 		end
 
 	end
 end
-
-		#get single review using nokogiri, potentially faster????
-		# def single_greads_review(id)
-		# 	@html_doc = Nokogiri::HTML(open("https://www.goodreads.com/review/show/#{id}"))
-		# 	@single_full_review = @html_doc.css("div.description")
-		# 	puts @single_full_review
-		# end
-
-#get plain goodreads API (widget)
-		# def greads_API(isbn)
-		# 	greads_API = "https://www.goodreads.com/book/isbn?format=json&key=LbfI8uwSm3Hd7X4Q1VoDsA&isbn=#{isbn}"
-		# 	greads_raw_output = RestClient.get(greads_API)
-		# 	greads_json_output = JSON.load(greads_raw_output)
-		# 	puts greads_json_output
-		# end
 

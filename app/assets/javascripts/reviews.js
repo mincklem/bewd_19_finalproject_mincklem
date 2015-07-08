@@ -163,12 +163,18 @@ function showChoice(){
 }
 
 function tableShelves(result){
+    var total = 0;
     $.each(result[1], function(i, val){
         $("#rolled_shelves_table").append("<tbody><td>"+i+"</td><td>"+val+"</td></tbody>");
     });
     $.each(result[0], function(i, val){
         $("#all_shelves_table").append("<tbody><td>"+i+"</td><td>"+val+"</td></tbody>");
+        var integer  = parseInt(val);
+        total = total+integer;
+        console.log(total);
+        $("#shelves_total_box").text("Total Goodreads Shelves Sampled: "+total+"")
     });
+
 }
 
 function graphAllShelves(result){

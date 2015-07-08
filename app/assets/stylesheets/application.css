@@ -151,8 +151,6 @@ color:white;
 }
 
 .bookCover {
-  	height: 170px;
-  	width: 120px;
 	position: relative;
 	display:inline-block;
 }
@@ -171,11 +169,6 @@ color:white;
 	border-radius: 3px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
-}
-
-.bookCover img {
-  width: 120px;
-   height: 170px;
 }
 
 .chosenTitle {

@@ -34,8 +34,8 @@ class Shelf < ActiveRecord::Base
             @all_hash[:"#{@shelf}"] = @val
       end
 		end
-		puts @all_hash
-		#Category Roll-up Counts
+		  puts @all_hash
+		  #Category Roll-up Counts
   		@sci_count = 0
   		@rom_count = 0
   		@mys_count = 0
@@ -49,10 +49,13 @@ class Shelf < ActiveRecord::Base
   		@class_count = 0
   		@ser_count = 0
   		@ya_count = 0
-  		@chic_count = 0
+  		@chick_count = 0
       @child_count = 0
       @hist_count = 0
-
+      @bookclub_count = 0
+      @brit_count = 0
+      @culture_count = 0 
+      @contemp_count = 0
   		#Category Roll-up search functions
 
   		#Science Fiction
@@ -126,10 +129,10 @@ class Shelf < ActiveRecord::Base
   			@ya_count = @ya_count + this.value.to_i
   			puts this.value.to_i
   		end
-  		#Chic-Lit
-  		@chic = Shelf.where(isbn: @isbn).where("shelves LIKE '%chic%'")
-  		@chic.each do |this|
-  			@chic_count = @chic_count + this.value.to_i
+  		#Chick-Lit
+  		@chick = Shelf.where(isbn: @isbn).where("shelves LIKE '%chick%'")
+  		@chick.each do |this|
+  			@chick_count = @chick_count + this.value.to_i
   			puts this.value.to_i
   		end
       @child = Shelf.where(isbn: @isbn).where("shelves LIKE '%child%' OR shelves LIKE '%kid%'")
@@ -140,6 +143,26 @@ class Shelf < ActiveRecord::Base
        @hist = Shelf.where(isbn: @isbn).where("shelves LIKE '%hist%'")
       @hist.each do |this|
         @hist_count = @hist_count + this.value.to_i
+        puts this.value.to_i
+      end
+      @bookclub = Shelf.where(isbn: @isbn).where("shelves LIKE '%club%'OR shelves LIKE '%group%'")
+      @bookclub.each do |this|
+        @bookclub_count = @bookclub_count + this.value.to_i
+        puts this.value.to_i
+      end
+      @brit = Shelf.where(isbn: @isbn).where("shelves LIKE '%brit%' OR shelves LIKE '%engl%' OR shelves LIKE '%euro%' OR shelves LIKE '%uk%'")
+      @brit.each do |this|
+        @brit_count = @brit_count + this.value.to_i
+        puts this.value.to_i
+      end
+      @culture = Shelf.where(isbn: @isbn).where("shelves LIKE '%cultur%'")
+      @culture.each do |this|
+        @culture_count = @culture_count + this.value.to_i
+        puts this.value.to_i
+      end
+        @contemp = Shelf.where(isbn: @isbn).where("shelves LIKE '%contemp%'")
+        @contemp.each do |this|
+        @contemp_count = @contemp_count + this.value.to_i
         puts this.value.to_i
       end
       
@@ -156,9 +179,13 @@ class Shelf < ActiveRecord::Base
 	  		:Classic=>@class_count,
 	  		:Series=>@ser_count,
 	  		:Young_Adult=>@ya_count,
-	  		:Chic_Lit=>@chic_count,
+	  		:Chick_Lit=>@chick_count,
         :Childrens=>@child_count,
-        :History=>@hist_count
+        :History=>@hist_count,
+        :Britain_England=>@brit_count,
+        :BookClub=>@bookclub_count,
+        :Multicultural=>@culture_count,
+        :Contemporary=>@contemp_count
   		}
   		puts @search_result
   		@returned_result = [@all_hash.sort_by {|_key, value| value}.reverse.to_h, @search_result.sort_by {|_key, value| value}.reverse.to_h]

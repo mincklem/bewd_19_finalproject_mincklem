@@ -1,13 +1,11 @@
          <div class="chosenTitle">
             <div class="bookCover">
-              <%if @img%>
                 <img src="<%=@img%>">
-              <%end%>
             </div>
             <div class="bookDescription">
               <p><%=@title%></p>
               <p><%=@author%></p>
-              <p><%=@date%></p>
+              
             </div>
         </div>
 
@@ -80,6 +78,7 @@
   <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">
       <div id="shelves_chart_box" class=".container-fluid">
           <h1>Goodreads Shelves - Category Roll-Ups</h1>
+          <h4 id="shelves_total_box"></h4>
           <div id="rolled_shelves">
              <canvas id="rollShelvesChart" class="shelvesChart" width="900px" height="600px"></canvas>
              <div class="spinnerBox">
