@@ -8,14 +8,22 @@ class ReviewsController < ApplicationController
   	include ISBN
 
 	def index
-  		@review = Review.new
-  		@goodreads_id = session[:isbn]
-  		@reviews = Review.where("(isbn IS #{@goodreads_id}) AND (review_text LIKE :query OR title LIKE :query)", 
-  		query: "%#{params[:search]}%")
-  		@img = session[:img]
-  		@title = session[:title]
-  		@author = session[:author]
-  		@date = session[:date]
+  		if session[:isbn].class == NilClass
+  			puts session[:isbn]
+  			puts "welcome redirect"
+  			redirect_to "/welcome" 
+  		else
+	  		puts session[:isbn].class
+	  		puts "no redirect"
+	  		@review = Review.new
+	  		@goodreads_id = session[:isbn]
+	  		@reviews = Review.where("(isbn IS #{@goodreads_id}) AND (review_text LIKE :query OR title LIKE :query)", 
+	  		query: "%#{params[:search]}%")
+	  		@img = session[:img]
+	  		@title = session[:title]
+	  		@author = session[:author]
+	  		@date = session[:date]
+  		end
   	end
     def show
   	@review = Review.find(params[:id])
@@ -126,7 +134,7 @@ class ReviewsController < ApplicationController
   end
 
   def welcome
-
+  	@img = nil
   end
 end
 
