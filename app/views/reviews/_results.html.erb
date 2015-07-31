@@ -1,28 +1,33 @@
-<%@json["GoodreadsResponse"]["search"]["results_end"].to_i.times do |number| %>
-			<div class="single_result">
-				<div class="cover_result">
-					<img src="<%=@returned_books[number]["best_book"]["image_url"]%>">
-				</div>
-			<div class="description_result">
-				<p>
-					<strong>Title: </strong><%="#{@returned_books[number]["best_book"]["title"]}" %> |  
-					<strong>Author: </strong><%="#{@returned_books[number]["best_book"]["author"]["name"]}" %> 
-				</p>
-				<p>
-					<strong>Reviews: </strong><%="#{@returned_books[number]["text_reviews_count"]}" %> | 
-					<strong>Avg. Rating: </strong><%="#{@returned_books[number]["average_rating"]}" %> | 	
-					<% @pub_date = "#{@returned_books[number]["original_publication_day"]}/#{@returned_books[number]["original_publication_month"]}/#{@returned_books[number]["original_publication_year"]}" %>
-					<strong>Publication Year: </strong><%=@pub_date%>
 
+<div id="wrapper">
+	<div id="page-content-wrapper">
+		<%@json["GoodreadsResponse"]["search"]["results_end"].to_i.times do |number| %>
+					<div class="single_result">
+						<div class="cover_result">
+							<img src="<%=@returned_books[number]["best_book"]["image_url"]%>">
+						</div>
+					<div class="description_result">
 						<p>
-				<%= button_to "Get Reviews", reviews_path, :method => "post", :params => {
-						:choice => "#{@returned_books[number]["best_book"]["id"]}",
-						:img => "#{@returned_books[number]["best_book"]["image_url"]}",
-						:title =>"#{@returned_books[number]["best_book"]["title"]}" ,
-						:author => "#{@returned_books[number]["best_book"]["author"]["name"]}",
-						:date => "#{@pub_date}"}
-					%> 	
+							<strong>Title: </strong><%="#{@returned_books[number]["best_book"]["title"]}" %> |  
+							<strong>Author: </strong><%="#{@returned_books[number]["best_book"]["author"]["name"]}" %> 
 						</p>
-			</div>
-			</div>
-<%end%>
+						<p>
+							<strong>Reviews: </strong><%="#{@returned_books[number]["text_reviews_count"]}" %> | 
+							<strong>Avg. Rating: </strong><%="#{@returned_books[number]["average_rating"]}" %> | 	
+							<% @pub_date = "#{@returned_books[number]["original_publication_day"]}/#{@returned_books[number]["original_publication_month"]}/#{@returned_books[number]["original_publication_year"]}" %>
+							<strong>Publication Year: </strong><%=@pub_date%>
+
+								<p>
+						<%= button_to "Get Reviews", reviews_path, :method => "post", :params => {
+								:choice => "#{@returned_books[number]["best_book"]["id"]}",
+								:img => "#{@returned_books[number]["best_book"]["image_url"]}",
+								:title =>"#{@returned_books[number]["best_book"]["title"]}" ,
+								:author => "#{@returned_books[number]["best_book"]["author"]["name"]}",
+								:date => "#{@pub_date}"}
+							%> 	
+								</p>
+					</div>
+					</div>
+		<%end%>
+	</div>
+</div>
