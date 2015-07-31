@@ -53,9 +53,14 @@ class Shelf < ActiveRecord::Base
       @child_count = 0
       @hist_count = 0
       @bookclub_count = 0
-      @brit_count = 0
+      @euro_count = 0
       @culture_count = 0 
       @contemp_count = 0
+      @spy_count = 0
+      @membio_count = 0
+      @psych_count = 0
+      @selfhelp_count = 0
+      @parenting_count = 0
   		#Category Roll-up search functions
 
   		#Science Fiction
@@ -140,7 +145,7 @@ class Shelf < ActiveRecord::Base
         @child_count = @child_count + this.value.to_i
         puts this.value.to_i
       end
-       @hist = Shelf.where(isbn: @isbn).where("shelves LIKE '%hist%'")
+       @hist = Shelf.where(isbn: @isbn).where("shelves LIKE '%hist%' OR shelves LIKE '%wwii%'")
       @hist.each do |this|
         @hist_count = @hist_count + this.value.to_i
         puts this.value.to_i
@@ -150,9 +155,9 @@ class Shelf < ActiveRecord::Base
         @bookclub_count = @bookclub_count + this.value.to_i
         puts this.value.to_i
       end
-      @brit = Shelf.where(isbn: @isbn).where("shelves LIKE '%brit%' OR shelves LIKE '%engl%' OR shelves LIKE '%euro%' OR shelves LIKE '%uk%'")
-      @brit.each do |this|
-        @brit_count = @brit_count + this.value.to_i
+      @euro = Shelf.where(isbn: @isbn).where("shelves LIKE '%brit%' OR shelves LIKE '%engl%' OR shelves LIKE '%euro%' OR shelves LIKE '%uk%' OR shelves LIKE '%spain%' OR shelves LIKE '%france%' OR shelves LIKE '%french%' OR shelves LIKE '%paris%'")
+      @euro.each do |this|
+        @euro_count = @euro_count + this.value.to_i
         puts this.value.to_i
       end
       @culture = Shelf.where(isbn: @isbn).where("shelves LIKE '%cultur%'")
@@ -165,7 +170,31 @@ class Shelf < ActiveRecord::Base
         @contemp_count = @contemp_count + this.value.to_i
         puts this.value.to_i
       end
-      
+        @spy = Shelf.where(isbn: @isbn).where("shelves LIKE '% spy %' OR shelves LIKE '%espion%' OR shelves LIKE '%spies%'")
+        @spy.each do |this|
+        @spy_count = @spy_count + this.value.to_i
+        puts this.value.to_i
+      end
+       @membio = Shelf.where(isbn: @isbn).where("shelves LIKE '%memoir%' OR shelves LIKE '%biog%' OR shelves LIKE '% bio %'")
+        @membio.each do |this|
+        @membio_count = @membio_count + this.value.to_i
+        puts this.value.to_i
+      end
+        @psych = Shelf.where(isbn: @isbn).where("shelves LIKE '%psyc%' OR shelves LIKE '%brain%' OR shelves LIKE '%mind%' OR shelves LIKE '%think%' OR shelves LIKE '%thought%' OR shelves LIKE '%mental%' OR shelves LIKE '%aspberg%' OR shelves LIKE '%austism%'")
+        @psych.each do |this|
+        @psych_count = @psych_count + this.value.to_i
+        puts this.value.to_i
+      end
+       @selfhelp = Shelf.where(isbn: @isbn).where("shelves LIKE '%self help%' OR shelves LIKE '%self-help%' OR shelves LIKE '%self_help%' OR shelves LIKE '%self-improvement%' OR shelves LIKE '%self_improvement%' OR shelves LIKE '%self improvement%' OR shelves LIKE '%aspberg%' OR shelves LIKE '%austism%'")
+        @selfhelp.each do |this|
+        @selfhelp_count = @selfhelp_count + this.value.to_i
+        puts this.value.to_i
+    end
+        @parenting = Shelf.where(isbn: @isbn).where("shelves LIKE '%parent%'")
+        @parenting.each do |this|
+        @parenting_count = @parenting_count + this.value.to_i
+        puts this.value.to_i
+    end
 
   		@search_result = {:Science_Fiction => @sci_count, 
   			:Romance => @rom_count,
@@ -175,20 +204,25 @@ class Shelf < ActiveRecord::Base
   			:Literature=>@lit_count,
 	  		:Humor=>@hum_count,
 	  		:Horror=>@hor_count,
-	  		:Fiction=>@fic_count,
+	  		:Non_Fiction=>@fic_count,
 	  		:Classic=>@class_count,
 	  		:Series=>@ser_count,
 	  		:Young_Adult=>@ya_count,
 	  		:Chick_Lit=>@chick_count,
         :Childrens=>@child_count,
         :History=>@hist_count,
-        :Britain_England=>@brit_count,
+        :Europe=>@euro_count,
         :BookClub=>@bookclub_count,
         :Multicultural=>@culture_count,
-        :Contemporary=>@contemp_count
+        :Contemporary=>@contemp_count,
+        :Spy_Espionage=>@spy_count,
+        :Memoir_Biography=>@membio_count,
+        :Psychology=>@psych_count,
+        :Self_Help=>@selfhelp_count,
+        :Parenting=>@parenting_count
   		}
   		puts @search_result
-  		@returned_result = [@all_hash.sort_by {|_key, value| value}.reverse.to_h, @search_result.sort_by {|_key, value| value}.reverse.to_h]
+  		@returned_result = [@all_hash.sort_by {|_key, value| value}.reverse.to_h, @search_result.sort_by {|_key, value| value}.reverse.to_h.delete_if {|key, value| value == 0 }]
   		puts @returned_result
   		@returned_result
   	end

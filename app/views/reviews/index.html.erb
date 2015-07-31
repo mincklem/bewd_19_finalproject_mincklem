@@ -1,27 +1,47 @@
-         <div class="chosenTitle">
-            <div class="bookCover">
-                <img src="<%=@img%>">
-            </div>
-            <div class="bookDescription">
-              <p><%=@title%></p>
-              <p><%=@author%></p>
-              
-            </div>
+        
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+<!--               <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"></a> -->
+              <div class="chosenTitle">
+                      <div class="bookCover">
+                          <img id="chosen_cover" src="<%=@img%>">
+                      </div>
+                      <div class="bookDescription">
+                            <p style="font-weight:bold"><%=@title%></p>
+                            <p><%=@author%></p>
+                      </div>
+              </div>
+                  <div style="border: 1px solid #e9e9e9; line-height: initial;"> 
+                    <div class="findISBN">
+                       <%= form_tag "/search", method: "GET" do |f| %>
+                        <%= text_field_tag(:search, params[:search], :placeholder => 'Search for a book') %>
+                        <%= submit_tag("Search") %>
+                        <% end %>
+                    </div>
+                  </div>
+                      <!-- Nav tabs -->
+              <div role="tabpanel">
+                <ul id="myTab" style="list-style-type:none; padding:0px" role="tablist">
+                    <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Summary</a></li>
+                    <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
+                    <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
+                    <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Goodreads Shelves</a></li>
+              </ul>
+             </div>
+          </div>
+            </ul>
         </div>
+        <!-- /#sidebar-wrapper -->
 
-  <div role="tabpanel">
-      <!-- Nav tabs -->
-      <ul id="myTab" class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Summary</a></li>
-        <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
-        <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
-        <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Goodreads Shelves</a></li>
-      </ul>
-    </div>
-
- <!-- Tab panes -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
 <div class="tab-content">
   <div role="tabpanel" aria-labelledby="reviewsTab" class="tab-pane fade in active" id="reviews">
+    <%= render 'quickDash' %>
+
       <div class="searchReviews">
         <%= form_tag "/", method: "GET" do |f| %>
           <%= label_tag(:search, "Search reviews:") %>
@@ -29,51 +49,51 @@
           <%= submit_tag("Search") %>
         <% end %>
       </div>  
-    <%= render 'quickDash' %>
-  	 <%= render 'list' %></div>
-      
+
+     <%= render 'list' %></div>
+
   <div role="tabpanel" aria-labelledby="wordCloudTab" class="tab-pane fade" id="wordCloudPanel">
-		<div class="btn-group" data-toggle="buttons-checkbox">
-			<h2>Filter reviews</h2>
-			<button type="button" id="sb1" class="btn btn-default btn-md">
-			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 1 Star
-			</button>
-			<button type="button" id="sb2" class="btn btn-default btn-md">
-			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 2 Star
-			</button>
-			<button type="button" id="sb3" class="btn btn-default btn-md">
-			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 3 Star
-			</button>
-			<button type="button" id="sb4" class="btn btn-default btn-md">
-			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 4 Star
-			</button>
-			<button type="button" id="sb5" class="btn btn-default btn-md">
-			  	<span class="glyphicon glyphicon-star" aria-hidden="true"></span> 5 Star
-			</button>
-			<button type="submit" id="starSubmit" class="btn btn-default btn-md"> Submit 
-			</button>
-		</div>
-		<div class="cloudParams">
-			<p>Exclude words (space separated): <input type="text" name="fname" id="user_excludes"></p>
-			<p>Minimum word frequency: <input type="text" name="fname" id="count_limit" value="4"></p>
-			<!-- <p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p> -->
-		</div>
+    <div class="btn-group" data-toggle="buttons-checkbox">
+      <h2>Filter reviews</h2>
+      <button type="button" id="sb1" class="btn btn-default btn-md">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 1 Star
+      </button>
+      <button type="button" id="sb2" class="btn btn-default btn-md">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 2 Star
+      </button>
+      <button type="button" id="sb3" class="btn btn-default btn-md">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 3 Star
+      </button>
+      <button type="button" id="sb4" class="btn btn-default btn-md">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 4 Star
+      </button>
+      <button type="button" id="sb5" class="btn btn-default btn-md">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 5 Star
+      </button>
+      <button type="submit" id="starSubmit" class="btn btn-default btn-md"> Submit 
+      </button>
+    </div>
+    <div class="cloudParams">
+      <p>Exclude words (space separated): <input type="text" name="fname" id="user_excludes"></p>
+      <p>Minimum word frequency: <input type="text" name="fname" id="count_limit" value="4"></p>
+      <!-- <p>Toggle Counts <input type="checkbox" name="counts" value="Bike"></p> -->
+    </div>
     <div class="spinnerBox" id="cloud_spinner">
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
-		</div>
+      <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
+    </div>
       <div class="wordCloudsBox">
-			</div>
+      </div>
   </div>
   <div role="tabpanel" aria-labelledby="themesTab" class="tab-pane fade" id="themes">
-  	<div id="monkey_themes">
-  	</div>
-  	<div id="monkey_keywords">
-  		<h1>MonkeyLearn's Keyword Analysis</h1>
+    <div id="monkey_themes">
+    </div>
+    <div id="monkey_keywords">
+      <h1>MonkeyLearn's Keyword Analysis</h1>
       <canvas id="keywordsChart" width="1000px" height="600px"></canvas>
       <div class="spinnerBox" id="monkey_spinner">
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom" ></i>
       </div>
-  	</div>
+    </div>
   </div>
   <div role="tabpanel" aria-labelledby="shelvesTab" class="tab-pane fade" id="shelves">
       <div id="shelves_chart_box" class=".container-fluid">
@@ -119,4 +139,38 @@
     </div>
   </div>
 </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+
+      <!-- Nav tabs -->
+        <!--       <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a id="reviewsTab" href="#reviews" aria-controls="reviewsTab" role="tab" data-toggle="tab">Summary</a></li>
+                <li role="presentation"><a id="wordCloudTab" href="#wordCloudPanel" aria-controls="wordCloudTab" role="tab" data-toggle="tab">Word Clouds</a></li>
+                <li role="presentation"><a id="themesTab" href="#themes" aria-controls="themesTab" role="tab" data-toggle="tab">Thematic Analysis</a></li>
+                <li role="presentation"><a id="shelvesTab" href="#shelves" aria-controls="shelvesTab" role="tab" data-toggle="tab">Goodreads Shelves</a></li>
+              </ul>
+           
+
+ <!-- Tab panes -->
+
+
+
 

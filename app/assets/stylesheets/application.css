@@ -35,10 +35,9 @@ h1 {
 }
 
 #quickDash {
-	width: 100%;
-	height: 1000px;
-	background-color: gray;
-	position: relative
+  width: 100%;
+  position: relative;
+  padding: 30px;
 }
 
 .login_box {
@@ -60,8 +59,8 @@ h1 {
 }
 
 .mainContainer {
-	padding: 30px;
 	margin: 0 auto;
+	margin-top: 70px;
 }
 
 .btn-group {
@@ -70,10 +69,13 @@ h1 {
 
  .header {
  	width: 100%;
- 	background-color: #325C83;
+ 	background-color: #000000;
+/* 	#325C83;*/
  	font-size: 20px;
- 	height: 75px;
- 	padding:15px;
+ 	height: 50px;
+ 	z-index: 500;
+ 	position: fixed;
+ 	padding:10px;
  	color: white;
  	-webkit-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
 	-moz-box-shadow: 1px 0px 6px 2px rgba(194,194,194,1);
@@ -92,10 +94,8 @@ h1 {
  }
 
  .title {
- 	display: inline-block;
- 	font-size: 25px;
- 	margin-left: 95px;
- 	  margin-top: 4px;
+display: inline-block;
+  margin-left: 70px;
  }
 
 .wordCloudsBox {
@@ -112,22 +112,20 @@ h1 {
 }
 
 .findISBN {
-	position: absolute;
-	display: inline-block;
-	 font-size: 18px;
-	   color:black;
-	right: 0px;
-	margin-right: 20px;
-	margin-top: 5px;
+  color: black;
+  padding: 10px;
 }
 
 .findISBN label {
 color:white;
 }
 
+.search_nav {
+	border-bottom: 1px solid #e9e9e9;
+}
+
 .logo {
-  height: 80px;
-  width: 85px;
+  height: 60px;
   position: absolute;
   top: 5px;
   margin-bottom: 10px;
@@ -139,11 +137,13 @@ color:white;
   display: block;
   position: absolute;
   right: 20px;
-  top: 80px;
-  font-size: 14px
+  top: 10px;
+  font-size: 14px;
 }
 
 .login a {
+  text-decoration: none;
+   color: white;
 }
 
 .word {
@@ -153,6 +153,12 @@ color:white;
 .bookCover {
 	position: relative;
 	display:inline-block;
+	width: 75px;
+  height: 112px;
+}
+
+#chosen_cover {
+  width: 75px
 }
 
 .bookCover::after {
@@ -174,7 +180,10 @@ color:white;
 .chosenTitle {
 	position: relative;
 	height: auto;
-  	padding-bottom: 30px;
+	font-size: 12px;
+  	padding: 20px 0px 20px 20px;
+  	border: 1px solid #e9e9e9
+
 }
 
 .chosenTitle.visible {
@@ -184,6 +193,8 @@ color:white;
 .bookDescription {
 	  position: relative;
   	display: inline-block;
+  	  width: 140px;
+   padding-left: 10px;
 
 }
 
@@ -271,7 +282,10 @@ color:white;
 	padding: 40px;
 }
 
-
+.quick_box {
+	border: 1px solid #e9e9e9;
+	height: 200px;
+}
 #keywordsChart {
 	position: absolute;
   margin: 0 auto;
@@ -286,10 +300,12 @@ color:white;
 }
 
 .searchReviews {
-  display: inline-block;
-  right: 30px;
-  top: 315px;
-  position: absolute;
+	display: inline-block;
+  left: 0px;
+  padding: 10px;
+  position: relative;
+  float:right;
+
 }
 
 .shelves_error {

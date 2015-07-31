@@ -5,13 +5,19 @@
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+      <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+  <link href="css/simple-sidebar.css" rel="stylesheet">
 
 <!-- SHARE THIS -->
 
@@ -25,18 +31,14 @@
 
 
 </head>
+
+
 <body>
+
 <div class="container-fluid">
 		 <div class="header">
       <img class="logo" src="https://i.imgur.com/n0TePKO.png" />
 		    <div class="title">Reader Reviews Dashboard</div>
-        <div class="findISBN">
-          <%= form_tag "/search", method: "GET" do |f| %>
-          <%= label_tag(:search, "Find a Book:") %>
-          <%= text_field_tag(:search, params[:search]) %>
-          <%= submit_tag("Search") %>
-          <% end %>
-        </div>
         <div class="login">
           <% if user_signed_in? %>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
@@ -46,7 +48,11 @@
         </div>
 	 </div>
 <div class="mainContainer">
+
+
+
 <%= yield %>
+
 </div>
 </body>
 </html>
