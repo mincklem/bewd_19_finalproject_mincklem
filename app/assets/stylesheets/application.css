@@ -98,6 +98,19 @@ display: inline-block;
   margin-left: 70px;
  }
 
+.demo_img {
+  width: relative;
+  height: 100%;
+  position: absolute;
+  display: block
+}
+
+ .new_user {
+    display: inline-block;
+  left: 500px;
+  position: absolute;
+ }
+
 .wordCloudsBox {
 	color: #5482BE;
 	height: 500px;
@@ -283,8 +296,9 @@ color:white;
 }
 
 .quick_box {
-	border: 1px solid #e9e9e9;
+/*	border: 1px solid #e9e9e9;*/
 	height: 200px;
+  text-align: center
 }
 #keywordsChart {
 	position: absolute;

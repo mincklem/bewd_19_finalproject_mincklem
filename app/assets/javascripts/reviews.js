@@ -17,28 +17,28 @@ $(document).ready(function(){
 		});
 	}
 
-	function starSubmit(){
-		$("#starSubmit").click(function(){
-			// get user minimum term frequency
-            $(".fa-pulse").css("visibility", "visible");
-			count = $("#count_limit").val();
-			// get user exclusions
-			user_excludes = $("#user_excludes").val();
-			console.log("sending stars");
-			$.ajax({
-			   type: "POST", 
-			   url: 'reviews/stars',
-			   beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-			   data: {"stars":stars, 
-			   "count": count, 
-			   "user_excludes":user_excludes},
-			   success: function(response) {
-			   	console.log(response);
-                makeCloud(response);
-			   }
-		 	});
-		});
-	};
+function starSubmit(){
+	$("#starSubmit").click(function(){
+		// get user minimum term frequency
+        $(".fa-pulse").css("visibility", "visible");
+		count = $("#count_limit").val();
+		// get user exclusions
+		user_excludes = $("#user_excludes").val();
+		console.log("sending stars");
+		$.ajax({
+		   type: "POST", 
+		   url: 'reviews/stars',
+		   beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+		   data: {"stars":stars, 
+		   "count": count, 
+		   "user_excludes":user_excludes},
+		   success: function(response) {
+		   	console.log(response);
+            makeCloud(response);
+		   }
+	 	});
+	});
+}
 
 function makeCloud(h) {
 $(".wordCloudsBox").children().remove();
@@ -46,6 +46,19 @@ $(".wordCloudsBox").children().remove();
     });
     $(".fa-pulse").css("visibility", "hidden");
 }
+
+//If on Search page, and MyLists or Recent Titles clicked, redirect to index//
+function recentTitlesLists(){
+    $("#recent_titles_tab, #my_lists_tab").click(function(){
+        var url = window.location.href;
+         console.log(url);
+        if (url.indexOf("search") >= 0 || url.indexOf("welcome") >= 0) {
+            window.location.replace("/")
+            }
+        else {}
+    })
+}
+
 
 function shelvesCount(h){
     $("#shelvesTab").click(function(){
@@ -130,7 +143,7 @@ function monkeyThemes(response){
         url : "https://api.monkeylearn.com/v2/extractors/ex_y7BPYzNG/extract/",
         type : "POST",
         headers: {
-            "Authorization": "token 935676726a9c5dee46805e9890680450e1132ff4",
+            "Authorization": "token 6bea4dacf7d38f65dcd56af45dda3cd246b19acb",
         },
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -415,4 +428,5 @@ monkeyCall();
 activeTab();
 starButton();
 starSubmit();
+recentTitlesLists();
 })

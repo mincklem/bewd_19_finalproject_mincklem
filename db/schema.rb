@@ -11,9 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706204944) do
+ActiveRecord::Schema.define(version: 20150801224035) do
 
   create_table "isbns", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.text     "list"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +35,7 @@ ActiveRecord::Schema.define(version: 20150706204944) do
     t.integer  "isbn"
     t.string   "platform"
     t.string   "date"
+    t.string   "img"
   end
 
   create_table "shelves", force: :cascade do |t|
@@ -50,6 +57,8 @@ ActiveRecord::Schema.define(version: 20150706204944) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "recent_titles"
+    t.string   "my_lists"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

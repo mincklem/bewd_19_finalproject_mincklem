@@ -8,6 +8,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require './stopwords'
+require 'aylien_text_api'
 
 #checking if string is numeric
 class String

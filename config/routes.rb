@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   post '/shelves', :to => 'shelves#shelves'
   get '/shelves', :to => 'shelves#index'
   get '/welcome', :to => 'reviews#welcome'
-  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,8 +3,9 @@
   <div id="page-content-wrapper">
         <div class="tab-content">
           <div role="tabpanel" aria-labelledby="reviewsTab" class="tab-pane fade in active" id="reviews">
+            <h1>Quick Dashboard</h1>
             <%= render 'quickDash' %>
-
+            <h1>Reviews Pulled</h1>
               <div class="searchReviews">
                 <%= form_tag "/", method: "GET" do |f| %>
                   <%= label_tag(:search, "Search reviews:") %>
@@ -13,11 +14,22 @@
                 <% end %>
               </div>  
 
-             <%= render 'list' %></div>
+             <%= render 'list' %>
+          </div>
+
+        <div role="tabpanel" aria-labelledby="Recent Titles" class="tab-pane fade in active" id="recent_titles">
+          <h1>RECENT TITLES</h1>
+          <%=@recent_titles%>
+        </div>
+
+        <div role="tabpanel" aria-labelledby="My Lists" class="tab-pane fade in active" id="my_lists">
+            <h1>MY LISTS </h1>
+            <%=@my_lists%>
+        </div>
 
           <div role="tabpanel" aria-labelledby="wordCloudTab" class="tab-pane fade" id="wordCloudPanel">
             <div class="btn-group" data-toggle="buttons-checkbox">
-              <h2>Filter reviews</h2>
+              <h1>Reviews Word Clouds</h1>
               <button type="button" id="sb1" class="btn btn-default btn-md">
                   <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 1 Star
               </button>
@@ -96,9 +108,8 @@
                           </tr>
                         </thead>
                     </table>
-                  </div>
+                </div>
               </div>
-              
             </div>
           </div>
         </div>
